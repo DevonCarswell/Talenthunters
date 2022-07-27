@@ -17,3 +17,17 @@ body {
   margin-bottom: 60px;
 }
 
+.bg-talenthunters {
+    background-color: aqua;
+}
+
+li {
+    margin: 0px 10px;
+    
+}
+
+i:hover {
+    color:blue
+}
+
+    
