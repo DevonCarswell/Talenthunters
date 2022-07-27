@@ -6,12 +6,12 @@
 	<h1>Login</h1>
 	<form>
 		<label for="email">Email</label><br/>
-		<input type="email" id="email" name="email" placeholder="example@gmail.com"><br/><br/>
+		<input type="email" id="email" name="email" placeholder="example@gmail.com" required><br/><br/>
 		<label for="password">Password</label><br/>
-		<input type="password" id="password" name="password" placeholder="password"><br/><br/>
+		<input type="password" id="password" name="password" placeholder="password" required><br/><br/>
 		<button type="submit">Submit</button>
 	</form>
 	<br/>
 	<a href="#">Forgot your password?</a><br/>
-	<a href="#">Click here, to register.</a>
+	<a asp-controller="Home" asp-action="Registration">Click here, to register.</a>
 </div>
