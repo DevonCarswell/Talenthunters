@@ -2,18 +2,19 @@
 	ViewData["Title"] = "Registration";
 }
 <div class="text-center">
-	<h1>@ViewData["Title"]</h1>
-	<form>
-		<label for="email">Please enter your email:</label><br/>
-		<input type="email" id="email" name="email" placeholder="example@gmail.com" required><br/><br/>
-		<label for="password">Please enter a password:</label><br/>
-		<input type="password" id="password" name="password" placeholder="password" required><br/><br/>
-		<label for="password">Confirm password:</label><br/>
-		<input type="password" id="password" name="password" placeholder="password" required><br/><br/>
-		<button type="submit">Register</button>
-	</form>
-	<br/>
+    <h1>@ViewData["Title"]</h1>
+    <label for="email">Please enter your email:</label><br/>
+        <input type="email" id="email" name="email" placeholder="example@gmail.com"><br/><br/>
+        <label for="password">Please enter a password:</label><br/>
+        <input type="password" id="password" name="password" placeholder="password"><br/><br/>
+        <label for="password">Confirm password:</label><br/>
+        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="password again"><br/><br/>
+        <button type="submit" id="register">Register</button>
+        <br/>
+
 </div>
+<script src="~/js/registration.js" asp-append-version="true" defer></script>
+
 
 
 
