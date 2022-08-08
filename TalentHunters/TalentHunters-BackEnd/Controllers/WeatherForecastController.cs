@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace TalentHunters_Backend.Controllers
+namespace TalentHunters_BackEnd.Controllers
 {
     [ApiController]
     [Route("[controller]")]
