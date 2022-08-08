@@ -1,4 +1,4 @@
-namespace TalentHunters_BackEnd
+namespace TalentHunters_Backend
 {
     public class WeatherForecast
     {

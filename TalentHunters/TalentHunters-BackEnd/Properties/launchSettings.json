@@ -4,18 +4,18 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:45992",
-      "sslPort": 44369
+      "applicationUrl": "http://localhost:55097",
+      "sslPort": 44382
     }
   },
   "profiles": {
-    "TalentHunters_BackEnd": {
+    "TalentHunters_Backend": {
       "commandName": "Project",
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7209;http://localhost:5209",
+      "applicationUrl": "https://localhost:7251;http://localhost:5251",
       "dotnetRunMessages": true
     },
     "IIS Express": {
