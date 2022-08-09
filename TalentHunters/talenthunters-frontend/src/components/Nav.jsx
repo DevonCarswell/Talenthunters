@@ -22,6 +22,7 @@ function BasicExample() {
                     />
                     </Navbar.Brand>
             </Container>
+            <Nav className="me-auto">
             <Container className="container-fluid">
             <Container className="navbar-nav flex-grow-1 justify-content-center">
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -34,36 +35,38 @@ function BasicExample() {
             </Container>
             </Container>
             <Container className="container-fluid justify-content-end">
-                <Container className="justify-content-end">
-                    <SplitButton
-                        align={{ lg: 'start' }}
-                        title="Profile"
-                        id="dropdown-menu-align-responsive-2"
-                    >
-                        <Dropdown.Item eventKey="1">Action 1</Dropdown.Item>
-                        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                        <Dropdown.Item eventKey="3">Something 2</Dropdown.Item>
-                        <Dropdown.Divider />
-                    </SplitButton>
-                </Container>
+                {/*<Container className="justify-content-end">*/}
+                {/*    <SplitButton*/}
+                {/*        align={{ lg: 'start' }}*/}
+                {/*        title="Profile"*/}
+                {/*        id="dropdown-menu-align-responsive-2"*/}
+                {/*    >*/}
+                {/*        <Dropdown.Item eventKey="1">Action 1</Dropdown.Item>*/}
+                {/*        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>*/}
+                {/*        <Dropdown.Item eventKey="3">Something 2</Dropdown.Item>*/}
+                {/*        <Dropdown.Divider />*/}
+                {/*    </SplitButton>*/}
+                {/*</Container>*/}
 
 
 
 
-
-                {/*<NavDropdown title="Profile" id="dropdown-menu-align-responsive-2" className="dropdown">*/}
-                {/*        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                {/*        <NavDropdown.Item href="#action/3.2">*/}
-                {/*            Another action*/}
-                {/*        </NavDropdown.Item>*/}
-                {/*        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                {/*        <NavDropdown.Divider />*/}
-                {/*        <NavDropdown.Item href="#action/3.4">*/}
-                {/*            Separated link*/}
-                {/*        </NavDropdown.Item>*/}
-                {/*    </NavDropdown>*/}
                
+                <NavDropdown title="Profile" id="basic-nav-dropdown" className="dropdown">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">
+                            Another action
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">
+                            Separated link
+                        </NavDropdown.Item>
+                    </NavDropdown>
             </Container>
+                </Nav>
+            
+            
         </Navbar>
     );
 }

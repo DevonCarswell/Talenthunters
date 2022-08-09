@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useState, useEffect } from 'react';
 import Ptag from './components/Ptag';
+import Nav from './components/Nav';
 export default App;
 
 
@@ -43,14 +44,18 @@ function App() {
     const fetchData = async () => {
         const response = await fetch('https://localhost:7155/weatherforecast');
         const data = await response.json();
-        console.log(data);
         return data;
 
     };
 
     
-        return (
-                <Ptag weather={weather} />
+    return (
+        <>
+        <Nav />
+
+            <Ptag weather={weather} />
+
+            </>
         );
 }
 
