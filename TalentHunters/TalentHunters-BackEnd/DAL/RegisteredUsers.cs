@@ -30,5 +30,11 @@ namespace TalentHunters_BackEnd.DAL
             return _users.FirstOrDefault(user => user.Id == id);
         }
 
+        public void UpdateEmail(Guid id, string email)
+        {
+            var user = _users.FirstOrDefault(user => user.Id == id);
+            user.UpdateEmail(email);
+        }
+
     }
 }

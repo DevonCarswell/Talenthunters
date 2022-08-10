@@ -8,7 +8,7 @@ namespace TalentHunters_BackEnd.DAL
         HashSet<User> GetAllUsers();
         void AddUser(string name, string password);
 
-        void UpdateUserById(int id);
-        void DeleteUser(int id);
+        void UpdateUserEmailById(Guid id, string email);
+        void DeleteUser(Guid id);
     }
 }

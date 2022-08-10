@@ -4,7 +4,7 @@
     {
         public Guid Id { get; }
         public DateTime RegistrationDate { get; }
-        public string Email { get; }
+        public string Email { get; private set; }
 
         public string HashedPassword { get; }
 
@@ -15,6 +15,11 @@
             HashedPassword = hashedPassword;
             Id = Guid.NewGuid();
             RegistrationDate = DateTime.Now;
+        }
+
+        public void UpdateEmail(string email)
+        {
+            this.Email = email;
         }
     }
 }

@@ -27,12 +27,12 @@ namespace TalentHunters_BackEnd.DAL
             _registeredUsers.RegisterUser(new User(name, SecurePasswordHasher.Hash(password)));
         }
 
-        public void UpdateUserById(int id)
+        public void UpdateUserEmailById(Guid id, string email)
         {
-            throw new NotImplementedException();
+            _registeredUsers.UpdateEmail(id, email);
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(Guid id)
         {
             throw new NotImplementedException();
         }

@@ -33,6 +33,14 @@ namespace TalentHunters_BackEnd.Controllers
         {
             _management.AddUser(regData.EmailToReg, regData.PasswordToReg);
         }
+
+        [HttpPut("update-user-email/{id}")]
+        public void UpdateUserEmailById(Guid id, [FromBody] string email )
+        {
+
+            _management.UpdateUserEmailById(id, email);
+
+        }
     };
 
 }
