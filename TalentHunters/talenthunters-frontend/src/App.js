@@ -12,7 +12,7 @@ export default App;
 //}
 
 function App() {
-    const data = [
+    /*const data = [
         {
             "date": "2022-08-10T14:11:06.6503283+02:00",
             "temperatureC": -15,
@@ -46,14 +46,14 @@ function App() {
         const data = await response.json();
         return data;
 
-    };
+    };*/
 
     
     return (
         <>
         <Nav />
 
-            <Ptag weather={weather} />
+            
 
             </>
         );
