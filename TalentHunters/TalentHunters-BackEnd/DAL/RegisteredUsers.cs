@@ -36,5 +36,10 @@ namespace TalentHunters_BackEnd.DAL
             user.UpdateEmail(email);
         }
 
+        public void DeleteUser(Guid id)
+        {
+            _users.Remove(_users.FirstOrDefault(user => user.Id == id));
+        }
+
     }
 }

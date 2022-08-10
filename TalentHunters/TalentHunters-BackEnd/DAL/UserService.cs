@@ -34,7 +34,7 @@ namespace TalentHunters_BackEnd.DAL
 
         public void DeleteUser(Guid id)
         {
-            throw new NotImplementedException();
+            _registeredUsers.DeleteUser(id);
         }
     }
 }

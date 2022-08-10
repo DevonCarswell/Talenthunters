@@ -41,6 +41,12 @@ namespace TalentHunters_BackEnd.Controllers
             _management.UpdateUserEmailById(id, email);
 
         }
+
+        [HttpDelete("delete-user/{id}")]
+        public void DeleteUser(Guid id)
+        {
+            _management.DeleteUser(id);
+        }
     };
 
 }
