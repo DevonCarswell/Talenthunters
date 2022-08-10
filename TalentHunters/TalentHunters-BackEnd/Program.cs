@@ -1,20 +1,20 @@
+using TalentHunters_BackEnd.DAL;
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(MyAllowSpecificOrigins,
-        policy =>
-        {
-            policy.WithOrigins("https://localhost:3000").AllowAnyHeader().AllowAnyMethod();
-        });
-});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<RegisteredUsers>();
+builder.Services.AddScoped<IManagement, UserService>();
+
+
+
 
 var app = builder.Build();
 
@@ -27,7 +27,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
