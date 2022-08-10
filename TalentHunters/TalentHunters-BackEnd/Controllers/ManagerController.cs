@@ -16,10 +16,16 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [HttpGet]
-        [Route("/get-users")]
+        [Route("get-users")]
         public HashSet<User> GetAllUsers()
         {
             return _management.GetAllUsers();
+        }
+
+        [HttpGet("get-user/{id}")]
+        public User GetUserById(Guid id)
+        {
+            return _management.GetUserById(id);
         }
     };
 

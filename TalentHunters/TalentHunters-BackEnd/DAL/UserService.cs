@@ -7,14 +7,14 @@ namespace TalentHunters_BackEnd.DAL
     {
         private RegisteredUsers _registeredUsers;
 
-        public UserService()
+        public UserService(RegisteredUsers instance)
         {
-            _registeredUsers = RegisteredUsers.Instance();
+            _registeredUsers = instance;
         }
 
-        public User GetUserById(int id)
+        public User GetUserById(Guid id)
         {
-            throw new NotImplementedException();
+            return _registeredUsers.GetUserById(id);
         }
 
         public HashSet<User> GetAllUsers()

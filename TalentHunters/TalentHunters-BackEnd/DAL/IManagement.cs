@@ -4,7 +4,7 @@ namespace TalentHunters_BackEnd.DAL
 {
     public interface IManagement
     {
-        User GetUserById(int id);
+        User GetUserById(Guid id);
         HashSet<User> GetAllUsers();
         void AddUser(string name, string password);
 

@@ -5,23 +5,13 @@ namespace TalentHunters_BackEnd.DAL
     public class RegisteredUsers
     {
 
-        private static RegisteredUsers _instance;
+        
         private HashSet<User> _users = new HashSet<User>();
 
-        private RegisteredUsers()
+        public RegisteredUsers()
         {
             _users.Add(new User("dalma@dalma.com", "gwegwe"));
             _users.Add(new User("zsolt@zsolt.com", "ggewghreh"));
-        }
-
-        public static RegisteredUsers Instance()
-        {
-            if (_instance == null)
-            {
-                _instance = new RegisteredUsers();
-            }
-
-            return _instance;
         }
 
         public void RegisterUser(User user)
@@ -32,6 +22,12 @@ namespace TalentHunters_BackEnd.DAL
         public HashSet<User> GetAllUsers()
         {
             return _users;
+        }
+
+
+        public User GetUserById(Guid id)
+        {
+            return _users.FirstOrDefault(user => user.Id == id);
         }
     }
 }
