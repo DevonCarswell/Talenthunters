@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
-import Ptag from '../components/Ptag';
+
 
 
 const management = () => {
-    const [data, setData] = useState([{}, { 'loading': true }]);
+    const [data, setData] = useState([{}]);
+    const [loading, setLoading] = useState(true);
     const handleClick = async () => {
         const users = await fetchData();
         console.log(users);
-        setData(users, { 'loading': false })
+        setData(users);
+        setLoading(false);
     };
 
 
@@ -24,25 +26,10 @@ return (
         <p>Szevasztok</p>
         <Button onClick={handleClick} />
         <div>
-            {data.loading ? '' : <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>User Id</th>
-                        <th>Registration Date</th>
-                        <th>Email</th>
-                        <th>Hashed Password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((forecast, index) =>
-                        <tr key={forecast.Id}>
-                            <td>{forecast.RegistrationDate}</td>
-                            <td>{forecast.Email}</td>
-                            <td>{forecast.HashedPassword}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>}
+            {loading ? '' :
+                data.map((user) => <p key={user.id}>Id: {user.id}, Email: {user.email}, Registration date: {user.registrationDate},
+                    PWhash: {user.hashedPassword}
+        </p>)}
         </div>
     </>
 

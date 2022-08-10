@@ -1,10 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, { Component } from 'react';
-import { useState, useEffect } from 'react';
-import Ptag from './components/Ptag';
-import Nav from './components/Nav';
-import Footer from './components/Footer'
-import { MDBFooter } from 'mdb-react-ui-kit';
+import { Routes, Route } from 'react-router-dom';
+import React from 'react';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
 import About from './pages/About';

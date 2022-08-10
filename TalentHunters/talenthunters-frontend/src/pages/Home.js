@@ -13,8 +13,8 @@ const home = () => {
         <button type="submit">Submit</button>
         </form>
         <br />
-        <Link to="#">Forgot your password?</Link><br />
-        <Link to="#">Click here, to register.</Link>
+        <Link to="/forgotpassword">Forgot your password?</Link><br />
+        <Link to="/register">Click here, to register.</Link>
         </div>
         );
 }
