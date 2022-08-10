@@ -29,5 +29,6 @@ namespace TalentHunters_BackEnd.DAL
         {
             return _users.FirstOrDefault(user => user.Id == id);
         }
+
     }
 }

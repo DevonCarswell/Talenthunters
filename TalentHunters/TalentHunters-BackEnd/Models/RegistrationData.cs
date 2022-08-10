@@ -4,13 +4,13 @@
     {
         public string EmailToReg { get; }
         public string PasswordToReg { get; }
-        public string ConfirmPasswordToReg { get; }
 
-        public RegistrationData(string emailToReg, string passwordToReg, string confirmPasswordToReg)
+
+        public RegistrationData(string emailToReg, string passwordToReg)
         {
             EmailToReg = emailToReg;
             PasswordToReg = passwordToReg;
-            ConfirmPasswordToReg = confirmPasswordToReg;
+
         }
     }
 }

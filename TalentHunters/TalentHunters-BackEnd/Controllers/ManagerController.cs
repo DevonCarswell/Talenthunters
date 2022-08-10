@@ -27,6 +27,12 @@ namespace TalentHunters_BackEnd.Controllers
         {
             return _management.GetUserById(id);
         }
+
+        [HttpPost("add-user")]
+        public void AddUser([FromBody] RegistrationData regData)
+        {
+            _management.AddUser(regData.EmailToReg, regData.PasswordToReg);
+        }
     };
 
 }
