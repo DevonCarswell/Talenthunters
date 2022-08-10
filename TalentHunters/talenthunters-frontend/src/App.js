@@ -1,7 +1,15 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { Component } from 'react';
 import { useState, useEffect } from 'react';
 import Ptag from './components/Ptag';
 import Nav from './components/Nav';
+import Footer from './components/Footer'
+import { MDBFooter } from 'mdb-react-ui-kit';
+import Home from './pages/Home';
+import Layout from './pages/Layout';
+import About from './pages/About';
+import Contacts from './pages/Contacts';
+import Management from './pages/Management';
 export default App;
 
 
@@ -50,13 +58,16 @@ function App() {
 
     
     return (
-        <>
-        <Nav />
+        <Routes>
+        <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contacts' element={<Contacts />} />
+            <Route path='/management' element={<Management />} />
+        </Route> 
+        </Routes>
 
-            
-
-            </>
-        );
+    );
 }
 
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,15 +8,15 @@ import logo from '../images/logo.png';
 
 function CollapsibleExample() {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="lg" variant="light" style={{ backgroundColor: '#07e3be'}}>
             <Container>
-                <Navbar.Brand href="#home"></Navbar.Brand>
+                <Link to="/" className="navbar-brand"><img src={logo} alt="" height="40"></img></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#features"><img src={logo} alt="" height="40"></img></Nav.Link>
-                        <Nav.Link href="#pricing"><i className="bi bi-people-fill"></i> About</Nav.Link>
-                        <Nav.Link href="#pricing"><i className="bi bi-telephone-fill"></i> Contacts</Nav.Link>
+                        <Link to='/about' className="nav-link"><i className="bi bi-people-fill"></i> About</Link>
+                        <Link to='/contacts' className="nav-link"><i className="bi bi-telephone-fill"></i> Contacts</Link>
+                        <Link to='/management' className="nav-link"><i className="bi bi-person-workspace"></i> User Management</Link>
                     </Nav>
                     <Nav>
                         <NavDropdown title="User" id="collasible-nav-dropdown">

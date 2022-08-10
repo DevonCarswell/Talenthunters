@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
     MDBFooter,
     MDBContainer,
@@ -10,7 +10,7 @@ import {
 
 export default function App() {
     return (
-        <MDBFooter className='text-center text-white fixed-bottom' style={{ backgroundColor: '#f1f1f1' }}>
+        <MDBFooter className='text-center text-white fixed-bottom' style={{ backgroundColor: '#07e3be' }}>
             <MDBContainer className='pt-4'>
                 <section className='mb-4'>
                     <MDBBtn
@@ -87,9 +87,6 @@ export default function App() {
                 </section>
             </MDBContainer>
 
-            <div className='text-center text-dark p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                TalentHunters - 2022
-            </div>
         </MDBFooter>
     );
 }
