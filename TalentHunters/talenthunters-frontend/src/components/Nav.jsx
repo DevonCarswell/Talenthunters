@@ -8,7 +8,7 @@ import logo from '../images/logo.png';
 
 function CollapsibleExample() {
     return (
-        <Navbar collapseOnSelect expand="lg" variant="light" style={{ backgroundColor: '#07e3be'}}>
+        <Navbar collapseOnSelect expand="lg" variant="light" style={{ backgroundColor: '#07e3be' }}>
             <Container>
                 <Link to="/" className="navbar-brand"><img src={logo} alt="" height="40"></img></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

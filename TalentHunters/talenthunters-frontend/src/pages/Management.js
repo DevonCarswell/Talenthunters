@@ -3,24 +3,17 @@ import Button from '../components/Button';
 import '../App.css';
 
 
-
 const management = () => {
-    const apis = ['get-users', `get-user/`, 'add-user', `update-user-email/`, `delete-user/`]
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
-    const [userId, setUserId] = useState('');
     const inputRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const newemailRef = useRef(null);
 
 
-
-
-
-
     const getusers = async () => {
-        fetch(`https://localhost:7155/manager/get-users`)
+        fetch(`/manager/get-users`)
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);
@@ -29,7 +22,7 @@ const management = () => {
 
     async function getuser(id) {
         // const id = inputRef.current.value;
-        fetch(`https://localhost:7155/manager/get-user/${id}`)
+        fetch(`/manager/get-user/${id}`)
             .then(response => response.json())
             .then(json => setData(json))
         inputRef.current.value = '';
@@ -37,25 +30,26 @@ const management = () => {
 
     }
 
+
     function deleteuser(id) {
-        fetch(`https://localhost:7155/manager/delete-user/${id}`,
+        fetch(`/manager/delete-user/${id}`,
             { method: 'DELETE' }
         );
-        console.log('Successfully deleted the user.');
-        getusers();
+        setInterval(() => {
+            getusers();
+        }, 200);
+        
     }
 
 
     async function adduser() {
         const newUser = { 'EmailToReg': emailRef.current.value, 'PasswordToReg': passwordRef.current.value };
-        console.log(newUser);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUser)
         };
-        const response = await fetch('https://localhost:7155/manager/add-user', requestOptions);
-        /*.then(data => this.setState({ postId: data.id }))*/
+        const response = await fetch('/manager/add-user', requestOptions);
         emailRef.current.value = '';
         passwordRef.current.value = '';
         getusers();
@@ -69,10 +63,11 @@ const management = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEmail)
         };
-        const response = await fetch(`https://localhost:7155/manager/update-user-email/${id}`, requestOptions);
+        const response = await fetch(`/manager/update-user-email/${id}`, requestOptions);
         getuser(id);
         newemailRef.current.value = '';
     }
+
 
     useEffect(() => {
         getusers();
