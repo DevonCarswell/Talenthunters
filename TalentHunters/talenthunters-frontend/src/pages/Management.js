@@ -9,6 +9,9 @@ const management = () => {
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState('-1');
     const inputRef = useRef(null);
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
 
 
     const handleClick = async () => {
@@ -20,7 +23,7 @@ const management = () => {
 
 
     async function getuser() {
-        const id = inputRef.current.value
+        const id = inputRef.current.value;
         fetch(`https://localhost:7155/manager/get-user/${id}`)
             .then(response => response.json())
             .then(json => setData(json))
@@ -37,15 +40,40 @@ const management = () => {
     }
 
 
+    async function adduser() {
+        const newUser = { 'EmailToReg': emailRef.current.value, 'PasswordToReg': passwordRef.current.value };
+        console.log(newUser);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser)
+        };
+        const response = await fetch('https://localhost:7155/manager/add-user', requestOptions);
+        /*.then(data => this.setState({ postId: data.id }))*/
+        setLoading(true);
+
+    }
+
     return (
         <>
+            <div>
+                <Button onClick={handleClick} text="Get All Users" /><br />
+            </div>
+                <br />
+            <div>
 
-            <Button onClick={handleClick} text="Get All Users" />
+                <label>Add New User</label><br />
+                <input placeholder="Email"
+                    id="userEmail" ref={emailRef} />
+                <input placeholder="Placeholder"
+                    id="userPassword" ref={passwordRef} />
+                <Button onClick={adduser} text="Add New User" />
+            </div>
 
             <div>
                 <br />
                 <label>Get single user by id</label> <br />
-                <input placeholder="userId" id="userid" ref={inputRef} />
+                <input placeholder="User Id" id="userid" ref={inputRef} />
                 <Button onClick={getuser} text="Get User by id" />
             </div>
             <div>
@@ -72,7 +100,7 @@ const management = () => {
                                 <td> {data.id} </td>
                                 <td> {data.email} </td>
                                 <td> {data.registrationDate} </td>
-                                    <td value={data.id}>{data.length == 0 ? '' : <Button text='X' />}</td>
+                                <td value={data.id}>{data.length == 0 ? '' : <Button text='X' />}</td>
                             </tr>}
                         </tbody>
                     </table>}
