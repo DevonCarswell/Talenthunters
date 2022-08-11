@@ -11,6 +11,7 @@ const management = () => {
     const inputRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+    const newemailRef = useRef(null);
 
 
 
@@ -27,7 +28,6 @@ const management = () => {
         fetch(`https://localhost:7155/manager/get-user/${id}`)
             .then(response => response.json())
             .then(json => setData(json))
-        console.log(data)
         setLoading(false);
     }
 
@@ -54,12 +54,27 @@ const management = () => {
 
     }
 
+
+    async function updateemail(id) {
+        const newEmail = newemailRef.current.value;
+        console.log(newEmail);
+        console.log(id);
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newEmail)
+        };
+        const response = await fetch(`https://localhost:7155/manager/update-user-email/${id}`, requestOptions);
+        getuser();
+    }
+
+
     return (
         <>
             <div>
                 <Button onClick={handleClick} text="Get All Users" /><br />
             </div>
-                <br />
+            <br />
             <div>
 
                 <label>Add New User</label><br />
@@ -76,6 +91,7 @@ const management = () => {
                 <input placeholder="User Id" id="userid" ref={inputRef} />
                 <Button onClick={getuser} text="Get User by id" />
             </div>
+
             <div>
                 {loading ? '' :
                     <table className="table" style={{ textAlign: 'center' }}>
@@ -100,6 +116,7 @@ const management = () => {
                                 <td> {data.id} </td>
                                 <td> {data.email} </td>
                                 <td> {data.registrationDate} </td>
+                                <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
                                 <td value={data.id}>{data.length == 0 ? '' : <Button text='X' />}</td>
                             </tr>}
                         </tbody>
