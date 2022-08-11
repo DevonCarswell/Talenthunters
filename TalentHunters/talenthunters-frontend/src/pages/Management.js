@@ -49,7 +49,7 @@ const management = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUser)
         };
-        const response = await fetch('/manager/add-user', requestOptions);
+        await fetch('/manager/add-user', requestOptions);
         emailRef.current.value = '';
         passwordRef.current.value = '';
         getusers();
@@ -63,7 +63,7 @@ const management = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEmail)
         };
-        const response = await fetch(`/manager/update-user-email/${id}`, requestOptions);
+        await fetch(`/manager/update-user-email/${id}`, requestOptions);
         getuser(id);
         newemailRef.current.value = '';
     }
@@ -141,7 +141,7 @@ const management = () => {
                                 <td> {data.email} </td>
                                 <td> {new Date(data.registrationDate).toLocaleString()} </td>
                                 <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
-                                <td value={data.id}>{data.length == 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
+                                <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
                             </tr>
 
                         </tbody>
