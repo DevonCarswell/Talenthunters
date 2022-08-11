@@ -7,6 +7,7 @@ const management = () => {
     const apis = ['get-users', `get-user/`, 'add-user', `update-user-email/`, `delete-user/`]
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
+    const [userId, setUserId] = useState('-1');
     const inputRef = useRef(null);
 
 
@@ -27,6 +28,15 @@ const management = () => {
         setLoading(false);
     }
 
+    function deleteuser(id) {
+        fetch(`https://localhost:7155/manager/delete-user/${id}`,
+            { method: 'DELETE' }
+        );
+        console.log('Successfully deleted the user.');
+        setLoading(true);
+    }
+
+
     return (
         <>
 
@@ -46,20 +56,23 @@ const management = () => {
                                 <th>ID</th>
                                 <th>Email</th>
                                 <th>RegistrationDate</th>
+                                <th>Delete User</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             {data.length >= 1 ? data.map((user, index) => (
                                 <tr key={index}>
-                                    <td> {user.id} </td>
+                                    <td value={user.id}> {user.id} </td>
                                     <td> {user.email} </td>
                                     <td> {user.registrationDate} </td>
+                                    <td value={user.id}>{data.length == 0 ? '' : <Button text='X' onClick={() => deleteuser(user.id)} />}</td>
                                 </tr>
-                            )) : <tr key ="0">
-                                    <td> {data.id} </td>
-                                    <td> {data.email} </td>
-                                    <td> {data.registrationDate} </td>
+                            )) : <tr key="0">
+                                <td> {data.id} </td>
+                                <td> {data.email} </td>
+                                <td> {data.registrationDate} </td>
+                                    <td value={data.id}>{data.length == 0 ? '' : <Button text='X' />}</td>
                             </tr>}
                         </tbody>
                     </table>}
