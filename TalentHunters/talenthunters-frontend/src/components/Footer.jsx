@@ -2,8 +2,6 @@
 import {
     MDBFooter,
     MDBContainer,
-    MDBCol,
-    MDBRow,
     MDBIcon,
     MDBBtn
 } from 'mdb-react-ui-kit';
@@ -15,7 +13,7 @@ export default function App() {
                 <section className='mb-4'>
                     <MDBBtn
                         rippleColor="dark"
-                        link
+                        //link//
                         floating
                         size="lg"
                         className='text-dark m-1'
@@ -27,7 +25,7 @@ export default function App() {
 
                     <MDBBtn
                         rippleColor="dark"
-                        link
+                        //link//
                         floating
                         size="lg"
                         className='text-dark m-1'
@@ -39,7 +37,7 @@ export default function App() {
 
                     <MDBBtn
                         rippleColor="dark"
-                        link
+                        //link//
                         floating
                         size="lg"
                         className='text-dark m-1'
@@ -51,7 +49,7 @@ export default function App() {
 
                     <MDBBtn
                         rippleColor="dark"
-                        link
+                        //link//
                         floating
                         size="lg"
                         className='text-dark m-1'
@@ -63,7 +61,7 @@ export default function App() {
 
                     <MDBBtn
                         rippleColor="dark"
-                        link
+                        //link
                         floating
                         size="lg"
                         className='text-dark m-1'
@@ -75,7 +73,7 @@ export default function App() {
 
                     <MDBBtn
                         rippleColor="dark"
-                        link
+                        //link
                         floating
                         size="lg"
                         className='text-dark m-1'
