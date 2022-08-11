@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '../components/Button';
+import '../App.css';
 
 
 
@@ -15,7 +16,7 @@ const management = () => {
 
 
 
-    const handleClick = async () => {
+    const getusers = async () => {
         fetch(`https://localhost:7155/manager/get-users`)
             .then(response => response.json())
             .then(json => setData(json))
@@ -68,57 +69,81 @@ const management = () => {
         getuser();
     }
 
+    useEffect(() => {
+        getusers();
+    }, [])
+
 
     return (
         <>
-            <div>
-                <Button onClick={handleClick} text="Get All Users" /><br />
-            </div>
-            <br />
-            <div>
+            <div className="queries">
+                <div>
+                    <label>Get All User</label><br />
+                    <Button onClick={getusers} text="Get" /><br />
+                </div>
 
-                <label>Add New User</label><br />
-                <input placeholder="Email"
-                    id="userEmail" ref={emailRef} />
-                <input placeholder="Placeholder"
-                    id="userPassword" ref={passwordRef} />
-                <Button onClick={adduser} text="Add New User" />
-            </div>
-
-            <div>
                 <br />
-                <label>Get single user by id</label> <br />
-                <input placeholder="User Id" id="userid" ref={inputRef} />
-                <Button onClick={getuser} text="Get User by id" />
-            </div>
+                <div>
+                    <br />
+                    <label>Get single user by id</label> <br />
+                    <input placeholder="User Id" id="userid" ref={inputRef} />
+                    <Button onClick={getuser} text="Search" />
+                </div>
+                <div>
 
+                    <label>Add New User</label><br />
+                    <input placeholder="Email"
+                        id="userEmail" ref={emailRef} />-
+                    <input placeholder="Password"
+                        id="userPassword" ref={passwordRef} />
+                    <Button onClick={adduser} text="Add" />
+                </div>
+
+
+            </div>
             <div>
-                {loading ? '' :
+                {data.length >= 1 || loading ?
                     <table className="table" style={{ textAlign: 'center' }}>
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Email</th>
                                 <th>RegistrationDate</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {data.map((user, index) => (
+                                <tr key={index}>
+                                    <td value={user.id}> {user.id} </td>
+                                    <td> {user.email} </td>
+                                    <td> {user.registrationDate} </td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table> :
+                    <table className="table" style={{ textAlign: 'center' }}>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>RegistrationDate</th>
+                                <th> Update Email</th>
                                 <th>Delete User</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {data.length >= 1 ? data.map((user, index) => (
-                                <tr key={index}>
-                                    <td value={user.id}> {user.id} </td>
-                                    <td> {user.email} </td>
-                                    <td> {user.registrationDate} </td>
-                                    <td value={user.id}>{data.length == 0 ? '' : <Button text='X' onClick={() => deleteuser(user.id)} />}</td>
-                                </tr>
-                            )) : <tr key="0">
-                                <td> {data.id} </td>
+
+                            <tr>
+                                <td value={data.id}> {data.id} </td>
                                 <td> {data.email} </td>
                                 <td> {data.registrationDate} </td>
                                 <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
-                                <td value={data.id}>{data.length == 0 ? '' : <Button text='X' />}</td>
-                            </tr>}
+                                <td value={data.id}>{data.length == 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
+                            </tr>
+
                         </tbody>
                     </table>}
             </div>

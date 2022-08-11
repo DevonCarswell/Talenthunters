@@ -29,4 +29,26 @@ i:hover {
     color: blue
 }
 
+.queries {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    
+}
+
+.button {
+    background-color: white;
+    padding: 1px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+    .button:hover {
+        background-color: #07e3be;
+        color: black;
+    }
 
