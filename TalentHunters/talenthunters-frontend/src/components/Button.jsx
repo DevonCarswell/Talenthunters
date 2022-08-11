@@ -1,8 +1,8 @@
 import React from 'react';
 
-function ReactComponent({onClick}) {
+function ReactComponent({onClick, text}) {
   return (
-      <button onClick={onClick} variant="outlined">Get All User </button>
+      <button onClick={onClick} variant="outlined">{text} </button>
   );
 }
 
