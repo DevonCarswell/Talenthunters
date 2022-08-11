@@ -8,11 +8,14 @@ const management = () => {
     const apis = ['get-users', `get-user/`, 'add-user', `update-user-email/`, `delete-user/`]
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
-    const [userId, setUserId] = useState('-1');
+    const [userId, setUserId] = useState('');
     const inputRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const newemailRef = useRef(null);
+
+
+
 
 
 
@@ -24,12 +27,14 @@ const management = () => {
     };
 
 
-    async function getuser() {
-        const id = inputRef.current.value;
+    async function getuser(id) {
+        // const id = inputRef.current.value;
         fetch(`https://localhost:7155/manager/get-user/${id}`)
             .then(response => response.json())
             .then(json => setData(json))
+        inputRef.current.value = '';
         setLoading(false);
+
     }
 
     function deleteuser(id) {
@@ -37,7 +42,7 @@ const management = () => {
             { method: 'DELETE' }
         );
         console.log('Successfully deleted the user.');
-        setLoading(true);
+        getusers();
     }
 
 
@@ -51,22 +56,22 @@ const management = () => {
         };
         const response = await fetch('https://localhost:7155/manager/add-user', requestOptions);
         /*.then(data => this.setState({ postId: data.id }))*/
-        setLoading(true);
-
+        emailRef.current.value = '';
+        passwordRef.current.value = '';
+        getusers();
     }
 
 
     async function updateemail(id) {
         const newEmail = newemailRef.current.value;
-        console.log(newEmail);
-        console.log(id);
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEmail)
         };
         const response = await fetch(`https://localhost:7155/manager/update-user-email/${id}`, requestOptions);
-        getuser();
+        getuser(id);
+        newemailRef.current.value = '';
     }
 
     useEffect(() => {
@@ -82,12 +87,12 @@ const management = () => {
                     <Button onClick={getusers} text="Get" /><br />
                 </div>
 
-                <br />
+
                 <div>
                     <br />
                     <label>Get single user by id</label> <br />
                     <input placeholder="User Id" id="userid" ref={inputRef} />
-                    <Button onClick={getuser} text="Search" />
+                    <Button onClick={() => getuser(inputRef.current.value)} text="Search" />
                 </div>
                 <div>
 
@@ -95,7 +100,7 @@ const management = () => {
                     <input placeholder="Email"
                         id="userEmail" ref={emailRef} />-
                     <input placeholder="Password"
-                        id="userPassword" ref={passwordRef} />
+                        id="userPassword" type="password" ref={passwordRef} />
                     <Button onClick={adduser} text="Add" />
                 </div>
 
@@ -117,7 +122,7 @@ const management = () => {
                                 <tr key={index}>
                                     <td value={user.id}> {user.id} </td>
                                     <td> {user.email} </td>
-                                    <td> {user.registrationDate} </td>
+                                    <td> {new Date(user.registrationDate).toLocaleDateString('en-gb')} </td>
 
                                 </tr>
                             ))}
@@ -139,7 +144,7 @@ const management = () => {
                             <tr>
                                 <td value={data.id}> {data.id} </td>
                                 <td> {data.email} </td>
-                                <td> {data.registrationDate} </td>
+                                <td> {new Date(data.registrationDate).toLocaleString()} </td>
                                 <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
                                 <td value={data.id}>{data.length == 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
                             </tr>

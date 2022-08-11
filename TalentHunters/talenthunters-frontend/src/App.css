@@ -8,10 +8,6 @@ html {
     }
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
 
 body {
     margin-bottom: 60px;
@@ -47,8 +43,18 @@ i:hover {
     transition-duration: 0.4s;
 }
 
-    .button:hover {
+
+.button:hover {
         background-color: #07e3be;
         color: black;
     }
 
+.blabla {
+    padding: 10px;
+    margin: 50px;
+
+}
+
+h1 {
+    text-align: center;
+}
