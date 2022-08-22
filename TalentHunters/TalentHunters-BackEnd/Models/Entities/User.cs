@@ -1,8 +1,11 @@
-﻿namespace TalentHunters_BackEnd.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TalentHunters_BackEnd.Models.Entities
 {
     public class User
     {
-        public Guid Id { get; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; }
         public DateTime RegistrationDate { get; }
         public string Email { get; private set; }
 
@@ -13,13 +16,8 @@
         {
             Email = email;
             HashedPassword = hashedPassword;
-            Id = Guid.NewGuid();
             RegistrationDate = DateTime.Now;
         }
 
-        public void UpdateEmail(string email)
-        {
-            this.Email = email;
-        }
     }
 }

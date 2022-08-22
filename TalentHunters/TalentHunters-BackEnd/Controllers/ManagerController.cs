@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TalentHunters_BackEnd.DAL;
 using TalentHunters_BackEnd.Models;
+using TalentHunters_BackEnd.Models.Entities;
 
 namespace TalentHunters_BackEnd.Controllers
 {

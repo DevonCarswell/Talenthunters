@@ -1,4 +1,4 @@
-﻿using TalentHunters_BackEnd.Models;
+﻿using TalentHunters_BackEnd.Models.Entities;
 
 namespace TalentHunters_BackEnd.DAL
 {
