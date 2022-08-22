@@ -5,6 +5,7 @@ import Layout from './pages/Layout';
 import About from './pages/About';
 import Contacts from './pages/Contacts';
 import Management from './pages/Management';
+import AddEmployee from './pages/AddEmployee'
 
 
 
@@ -17,6 +18,7 @@ function App() {
                 <Route path='/about' element={<About />} />
                 <Route path='/contacts' element={<Contacts />} />
                 <Route path='/management' element={<Management />} />
+                <Route path='/addemployee' element={<AddEmployee />} />
             </Route>
         </Routes>
 

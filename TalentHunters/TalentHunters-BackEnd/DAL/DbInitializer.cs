@@ -1,4 +1,5 @@
 ﻿using TalentHunters_BackEnd.Models.Entities;
+using TalentHunters_BackEnd.Models.Enums;
 using TalentHunters_BackEnd.Utilities;
 
 namespace TalentHunters_BackEnd.DAL
@@ -15,10 +16,24 @@ namespace TalentHunters_BackEnd.DAL
                 return;
             }
 
-            var user1 = new User("zsolt@zsolt.hu", SecurePasswordHasher.Hash("1234"));
-            var user2 = new User("dalma@dalma.hu", SecurePasswordHasher.Hash("4567"));
+            var user1 = new Employee()
+            {
+                Email = "zsolt@zsolt.hu",
+                FirstName = "Zsolt",
+                LastName = "Kasza",
+                EmployeeRole = EmployeeRole.BackEndDeveloper,
+                HashedPassword = SecurePasswordHasher.Hash("1234")
+            };
+            var user2 = new Employee()
+            {
+                Email = "dalma@dalma.hu",
+                FirstName = "Dalma",
+                LastName = "Csernok",
+                EmployeeRole = EmployeeRole.FrontEndDeveloper,
+                HashedPassword = SecurePasswordHasher.Hash("4567")
+            };
 
-            context.Users.AddRange(new List<User>{user2,user1});
+            context.Users.AddRange(new List<Employee>{user2,user1});
             context.SaveChanges();
         }
     }

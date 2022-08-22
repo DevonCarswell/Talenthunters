@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import '../App.css';
 
 
 const management = () => {
+    // const [category, setCategory] = useState("employee")
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
+    const [userId, setUserId] = useState("");
     const inputRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
@@ -13,47 +16,34 @@ const management = () => {
 
 
     const getusers = async () => {
-        fetch(`/manager/get-users`)
+        fetch(`/manager/get-employees`)
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);
     };
 
 
-    async function getuser(id) {
+     async function getuser(userId) {
         // const id = inputRef.current.value;
-        fetch(`/manager/get-user/${id}`)
+         fetch(`/manager/get-employee/${userId}`)
             .then(response => response.json())
             .then(json => setData(json))
-        inputRef.current.value = '';
+        setUserId("")
         setLoading(false);
 
     }
 
 
-    function deleteuser(id) {
-        fetch(`/manager/delete-user/${id}`,
+    async function deleteuser(id) {
+        await fetch(`/manager/delete-employee/${id}`,
             { method: 'DELETE' }
         );
-        setInterval(() => {
-            getusers();
-        }, 200);
-        
-    }
-
-
-    async function adduser() {
-        const newUser = { 'EmailToReg': emailRef.current.value, 'PasswordToReg': passwordRef.current.value };
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newUser)
-        };
-        await fetch('/manager/add-user', requestOptions);
-        emailRef.current.value = '';
-        passwordRef.current.value = '';
         getusers();
+
     }
+
+
+    
 
 
     async function updateemail(id) {
@@ -63,15 +53,17 @@ const management = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEmail)
         };
-        await fetch(`/manager/update-user-email/${id}`, requestOptions);
+        await fetch(`/manager/update-employee-email/${id}`, requestOptions);
         getuser(id);
         newemailRef.current.value = '';
     }
 
+   
 
     useEffect(() => {
         getusers();
     }, [])
+
 
 
     return (
@@ -86,17 +78,18 @@ const management = () => {
                 <div>
                     <br />
                     <label>Get single user by id</label> <br />
-                    <input placeholder="User Id" id="userid" ref={inputRef} />
-                    <Button onClick={() => getuser(inputRef.current.value)} text="Search" />
+                    <input placeholder="User Id" id="userid" value={userId} onChange={(e)=> setUserId(e.target.value)} />
+                    <Button onClick={() => getuser(userId)} text="Search" />
                 </div>
                 <div>
 
-                    <label>Add New User</label><br />
-                    <input placeholder="Email"
-                        id="userEmail" ref={emailRef} />-
-                    <input placeholder="Password"
-                        id="userPassword" type="password" ref={passwordRef} />
-                    <Button onClick={adduser} text="Add" />
+                    {/*<label>Add New User</label><br />*/}
+                    {/*<input placeholder="Email"*/}
+                    {/*    id="userEmail" ref={emailRef} />-*/}
+                    {/*<input placeholder="Password"*/}
+                    {/*    id="userPassword" type="password" ref={passwordRef} />*/}
+                    <Link to='/addemployee' className="nav-link"> <Button text="Add Employee" /></Link>
+                    
                 </div>
 
 
@@ -107,8 +100,11 @@ const management = () => {
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
-                                <th>RegistrationDate</th>
+                                <th>Role</th>
+                                <th>Registration Date</th>
                             </tr>
                         </thead>
 
@@ -116,7 +112,12 @@ const management = () => {
                             {data.map((user, index) => (
                                 <tr key={index}>
                                     <td value={user.id}> {user.id} </td>
+
+                                    <td> {user.firstName} </td>
+                                    <td> {user.lastName} </td>
                                     <td> {user.email} </td>
+                                    {/* TODO employeeRole separation*/}
+                                    <td> {user.employeeRole} </td>
                                     <td> {new Date(user.registrationDate).toLocaleDateString('en-gb')} </td>
 
                                 </tr>
@@ -127,10 +128,13 @@ const management = () => {
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
-                                <th>RegistrationDate</th>
-                                <th> Update Email</th>
-                                <th>Delete User</th>
+                                <th>Role</th>
+                                <th>Registration Date</th>
+                                <th>Update Email</th>
+                                <th>Delete Employee</th>
                             </tr>
                         </thead>
 
@@ -138,15 +142,18 @@ const management = () => {
 
                             <tr>
                                 <td value={data.id}> {data.id} </td>
-                                <td> {data.email} </td>
-                                <td> {new Date(data.registrationDate).toLocaleString()} </td>
-                                <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
-                                <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
-                            </tr>
+                                <td>  {data.firstName} </td>
+                            <td>  {data.lastName} </td>
+                        <td> {data.email} </td>
+                        <td> {data.employeeRole} </td>
+                        <td> {new Date(data.registrationDate).toLocaleString()} </td>
+                        <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
+                        <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
+                    </tr>
 
                         </tbody>
-                    </table>}
-            </div>
+        </table>}
+            </div >
 
 
 
