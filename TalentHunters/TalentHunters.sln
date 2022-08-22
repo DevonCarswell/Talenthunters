@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TalentHunters-FrontEnd", "TalentHunters-FrontEnd\TalentHunters-FrontEnd.esproj", "{CF61B38B-F46E-4261-8FD4-91EB53482A38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentHunters-BackEnd", "TalentHunters-BackEnd\TalentHunters-BackEnd.csproj", "{05A06CD8-45D5-4A42-AA20-D32BA0446978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TalentHunters-BackEnd", "TalentHunters-BackEnd\TalentHunters-BackEnd.csproj", "{05A06CD8-45D5-4A42-AA20-D32BA0446978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5F4EADE6-072D-4AD8-ADF6-97449A139E55}
+		SolutionGuid = {46D619B1-834C-4252-BCCD-D0F9092B06D8}
 	EndGlobalSection
 EndGlobal
