@@ -5,11 +5,19 @@ namespace TalentHunters_BackEnd.DAL
 {
     public class TalentHuntersContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Employee> Users { get; set; }
         public TalentHuntersContext(DbContextOptions<TalentHuntersContext> options) : base(options)
         {
             
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().ToTable("User");
+        }
+
+
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -21,10 +29,5 @@ namespace TalentHunters_BackEnd.DAL
         //    var connectionString = configuration.GetConnectionString("DefaultConnection");
         //    optionsBuilder.UseSqlServer(connectionString);
         //}
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().ToTable("User");
-        }
     }
 }

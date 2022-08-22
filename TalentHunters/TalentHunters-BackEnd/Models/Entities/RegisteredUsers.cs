@@ -1,17 +1,15 @@
-﻿using TalentHunters_BackEnd.Models.Entities;
-
-namespace TalentHunters_BackEnd.DAL
+﻿namespace TalentHunters_BackEnd.Models.Entities
 {
     public class RegisteredUsers
     {
 
 
-        private HashSet<User> _users = new HashSet<User>();
+        private HashSet<Employee> _users = new HashSet<Employee>();
 
         public RegisteredUsers()
         {
-            _users.Add(new User("dalma@dalma.com", "gwegwe"));
-            _users.Add(new User("zsolt@zsolt.com", "ggewghreh"));
+            //_users.Add(new User("dalma@dalma.com", "gwegwe"));
+            //_users.Add(new User("zsolt@zsolt.com", "ggewghreh"));
         }
 
         //public void RegisterUser(User user)

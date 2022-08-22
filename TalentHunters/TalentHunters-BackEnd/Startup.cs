@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TalentHunters_BackEnd.DAL;
+using TalentHunters_BackEnd.DAL.Interfaces;
+using TalentHunters_BackEnd.DAL.Services;
 
 namespace TalentHunters_BackEnd
 {
@@ -26,7 +28,7 @@ namespace TalentHunters_BackEnd
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // services.AddControllersWithViews();
-            //services.AddScoped<IManagement, UserService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
