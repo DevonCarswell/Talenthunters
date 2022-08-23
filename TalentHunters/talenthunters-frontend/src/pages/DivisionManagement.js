@@ -16,7 +16,7 @@ const DivisionManagement = () => {
 
 
     const getdivisions = async () => {
-        fetch(`/division/get-divisions`)
+        await fetch(`/division/get-divisions`)
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);
@@ -25,7 +25,7 @@ const DivisionManagement = () => {
 
     async function getdivision(divisionId) {
         // const id = inputRef.current.value;
-        fetch(`/division/get-division/${divisionId}`)
+        await fetch(`/division/get-division/${divisionId}`)
             .then(response => response.json())
             .then(json => setData(json))
         setDivisionId("")
@@ -41,8 +41,6 @@ const DivisionManagement = () => {
         getdivisions();
 
     }
-
-
 
 
     useEffect(() => {
@@ -95,10 +93,9 @@ const DivisionManagement = () => {
                             {data.map((division, index) => (
                                 <tr key={index}>
                                     <td value={division.id}> {division.id} </td>
-
-                                    <td> {division.Name} </td>
-                                    {/* <td> {division.Manager} </td>
-                                    <td> {division.Employees} </td> */}
+                                    <td> {division.name} </td>
+                                    {/*<td>{division.manager}</td>*/}
+                                    {/*<td> {division.Employees} </td>*/}
                                     {/* TODO employeeRole separation*/}
 
 
@@ -121,9 +118,9 @@ const DivisionManagement = () => {
 
                             <tr>
                                 <td value={data.id}> {data.id} </td>
-                                <td>  {data.Name} </td>
-                                {/* <td>  {data.Manager} </td>
-                                <td> {data.Employees} </td> */}
+                                <td>  {data.name} </td>
+                                {/*<td>  {data.Manager} </td>
+                                <td> {data.Employees} </td>*/}
                                 <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deletedivision(data.id)} />}</td>
                             </tr>
 
