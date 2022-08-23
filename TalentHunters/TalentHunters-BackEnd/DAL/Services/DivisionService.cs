@@ -17,29 +17,37 @@ namespace TalentHunters_BackEnd.DAL.Services
         }
 
 
-        public Task AddDivision(Division division)
+        public async Task AddDivision(Division division)
         {
-            throw new NotImplementedException();
+            _context.Divisions.Add(division);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Division> GetDivisionById(long id)
+        public async Task<Division> GetDivisionById(long id)
         {
-            throw new NotImplementedException();
+            var division = _context.Divisions.Include(d => d.Manager).Include(d => d.Employees).FirstAsync(div => div.Id == id);
+            return await division;
         }
 
-        public Task<List<Division>> GetAllDivisions()
+        public async Task<List<Division>> GetAllDivisions()
         {
-            throw new NotImplementedException();
+            var divisions = _context.Divisions.Include(d => d.Manager).Include(d => d.Employees).ToListAsync();
+            return await divisions;
         }
 
-        public Task<List<Employee>> GetEmployeesByDivision(long id)
+        public async Task<List<Employee>> GetEmployeesByDivision(long id)
         {
-            throw new NotImplementedException();
+            var employees = _context.Divisions
+                .Where(div => div.Id == id)
+                .SelectMany(div => div.Employees).ToListAsync();
+            return await employees;
         }
 
-        public Task DeleteDivision(long id)
+        public async Task DeleteDivision(long id)
         {
-            throw new NotImplementedException();
+            var divisionToDelete = GetDivisionById(id).Result;
+            _context.Divisions.Remove(divisionToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }

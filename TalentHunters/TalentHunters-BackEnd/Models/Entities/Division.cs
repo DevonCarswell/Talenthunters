@@ -18,15 +18,6 @@ namespace TalentHunters_BackEnd.Models.Entities
             Employees = new HashSet<Employee>();
         }
 
- 
-
-
-        //public User(string email, string hashedPassword)
-        //{
-        //    Email = email;
-        //    HashedPassword = hashedPassword;
-        //    RegistrationDate = DateTime.Now;
-        //}
 
     }
 }

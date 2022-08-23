@@ -33,7 +33,20 @@ namespace TalentHunters_BackEnd.DAL
                 HashedPassword = SecurePasswordHasher.Hash("4567")
             };
 
-            context.Employees.AddRange(new List<Employee>{user2,user1});
+            // context.Employees.AddRange(new List<Employee>{user2,user1});
+            var division = new Division()
+            {
+                Name = "Front End Developers",
+                Manager = user2
+            };
+
+            var division2 = new Division()
+            {
+                Name = "Back End Developers",
+                Manager = user1
+            };
+
+            context.Divisions.AddRange(new List<Division> {division, division2});
             context.SaveChanges();
         }
     }

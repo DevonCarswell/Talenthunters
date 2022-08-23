@@ -5,11 +5,11 @@ namespace TalentHunters_BackEnd.Models.Enums;
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum EmployeeRole
 {
+    None,
     FrontEndDeveloper,
     BackEndDeveloper,
     ManualTester,
     UiUxDesigner,
     ScrumMaster,
-    ProductOwner,
-    None,
+    ProductOwner
 }

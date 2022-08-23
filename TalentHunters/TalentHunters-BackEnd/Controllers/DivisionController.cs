@@ -19,9 +19,9 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [HttpPost("add-division")]
-        public async Task AddDivision([FromBody] Division emp)
+        public async Task AddDivision([FromBody] Division division)
         {
-            await _divisionService.AddDivision(emp);
+            await _divisionService.AddDivision(division);
         }
 
         [HttpGet("get-division/{id}")]
@@ -38,7 +38,7 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [HttpGet]
-        [Route("get-employees-by-division")]
+        [Route("get-employees-by-division/{id}")]
         public async Task<List<Employee>> GetEmployeesByDivision(long id)
         {
             return await _divisionService.GetEmployeesByDivision(id);
