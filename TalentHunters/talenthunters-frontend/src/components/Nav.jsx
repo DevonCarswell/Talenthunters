@@ -16,7 +16,8 @@ function CollapsibleExample() {
                     <Nav className="me-auto">
                         <Link to='/about' className="nav-link"><i className="bi bi-people-fill"></i> About</Link>
                         <Link to='/contacts' className="nav-link"><i className="bi bi-telephone-fill"></i> Contacts</Link>
-                        <Link to='/management' className="nav-link"><i className="bi bi-person-workspace"></i> User Management</Link>
+                        <Link to='/employee-management' className="nav-link"><i className="bi bi-person-workspace"></i> Employee Management</Link>
+                        <Link to='/division-management' className="nav-link"><i className="bi bi-person-workspace"></i> Division Management</Link>
                     </Nav>
                     <Nav>
                         <NavDropdown title="User" id="collasible-nav-dropdown">

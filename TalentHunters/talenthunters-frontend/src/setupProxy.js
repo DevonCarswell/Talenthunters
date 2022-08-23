@@ -5,7 +5,12 @@ const context = [
     "/employee/get-employee",
     "/employee/add-employee",
     "/employee/update-employee-email",
-    "/employee/delete-employee"
+    "/employee/delete-employee",
+    "/division/get-divisions",
+    "/division/get-division",
+    "/division/add-division",
+    "/division/delete-division",
+    "/division/get-employees-by-division"
 ];
 
 module.exports = function (app) {

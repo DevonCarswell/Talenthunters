@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import '../App.css';
 
 
-const management = () => {
+const employeeManagement = () => {
     // const [category, setCategory] = useState("employee")
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ const management = () => {
             .then(json => setData(json))
         setLoading(false);
     };
-
+    console.log(data);
 
      async function getuser(userId) {
         // const id = inputRef.current.value;
@@ -164,4 +164,4 @@ const management = () => {
 
 
 
-export default management;
+export default employeeManagement;

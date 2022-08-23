@@ -37,7 +37,7 @@ namespace TalentHunters_BackEnd.DAL
             var division = new Division()
             {
                 Name = "Front End Developers",
-                Manager = user2
+                Manager = user2,
             };
 
             var division2 = new Division()
@@ -46,7 +46,39 @@ namespace TalentHunters_BackEnd.DAL
                 Manager = user1
             };
 
-            context.Divisions.AddRange(new List<Division> {division, division2});
+            var division3 = new Division()
+            {
+                Name = "Manual Testers",
+                Manager = new Employee()
+                {
+                    Email = "viktor@viktor.com",
+                    FirstName = "Viktor",
+                    LastName = "Olló",
+                    EmployeeRole = EmployeeRole.ManualTester,
+                    HashedPassword = SecurePasswordHasher.Hash("jános")
+                },
+                Employees = new HashSet<Employee>()
+                {
+                    new Employee()
+                    {
+                        Email = "alma@alma.com",
+                        FirstName = "Alma",
+                        LastName = "Banán",
+                        EmployeeRole = EmployeeRole.ManualTester,
+                        HashedPassword = SecurePasswordHasher.Hash("jglmindg")
+                    },
+                    new Employee()
+                    {
+                        Email = "banán@banán.com",
+                        FirstName = "Banán",
+                        LastName = "Bálint",
+                        EmployeeRole = EmployeeRole.ManualTester,
+                        HashedPassword = SecurePasswordHasher.Hash("aaa14578")
+                    },
+                }
+            };
+
+            context.Divisions.AddRange(new List<Division> {division, division2, division3});
             context.SaveChanges();
         }
     }
