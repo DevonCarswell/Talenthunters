@@ -11,7 +11,7 @@ namespace TalentHunters_BackEnd.DAL
         {
             context.Database.EnsureCreated();
 
-            if (context.Users.Any())
+            if (context.Employees.Any() || context.Divisions.Any())
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace TalentHunters_BackEnd.DAL
                 HashedPassword = SecurePasswordHasher.Hash("4567")
             };
 
-            context.Users.AddRange(new List<Employee>{user2,user1});
+            context.Employees.AddRange(new List<Employee>{user2,user1});
             context.SaveChanges();
         }
     }

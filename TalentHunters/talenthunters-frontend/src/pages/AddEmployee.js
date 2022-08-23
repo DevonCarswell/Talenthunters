@@ -35,7 +35,7 @@ function ReactComponent() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUser)
         };
-        await fetch('/manager/add-employee', requestOptions);
+        await fetch('/employee/add-employee', requestOptions);
         
         
     }

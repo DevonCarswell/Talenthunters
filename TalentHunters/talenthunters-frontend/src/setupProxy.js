@@ -1,11 +1,11 @@
 ﻿const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const context = [
-    "/manager/get-employees",
-    "/manager/get-employee",
-    "/manager/add-employee",
-    "/manager/update-employee-email",
-    "/manager/delete-employee"
+    "/employee/get-employees",
+    "/employee/get-employee",
+    "/employee/add-employee",
+    "/employee/update-employee-email",
+    "/employee/delete-employee"
 ];
 
 module.exports = function (app) {

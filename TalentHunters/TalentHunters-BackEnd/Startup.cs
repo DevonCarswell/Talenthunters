@@ -29,6 +29,7 @@ namespace TalentHunters_BackEnd
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             // services.AddControllersWithViews();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IDivisionService, DivisionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

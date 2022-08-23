@@ -9,11 +9,11 @@ namespace TalentHunters_BackEnd.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ManagerController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
 
-        public ManagerController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }

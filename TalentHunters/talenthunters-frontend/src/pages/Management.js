@@ -16,7 +16,7 @@ const management = () => {
 
 
     const getusers = async () => {
-        fetch(`/manager/get-employees`)
+        fetch(`/employee/get-employees`)
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);
@@ -25,7 +25,7 @@ const management = () => {
 
      async function getuser(userId) {
         // const id = inputRef.current.value;
-         fetch(`/manager/get-employee/${userId}`)
+         fetch(`/employee/get-employee/${userId}`)
             .then(response => response.json())
             .then(json => setData(json))
         setUserId("")
@@ -35,7 +35,7 @@ const management = () => {
 
 
     async function deleteuser(id) {
-        await fetch(`/manager/delete-employee/${id}`,
+        await fetch(`/employee/delete-employee/${id}`,
             { method: 'DELETE' }
         );
         getusers();
@@ -53,7 +53,7 @@ const management = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEmail)
         };
-        await fetch(`/manager/update-employee-email/${id}`, requestOptions);
+        await fetch(`/employee/update-employee-email/${id}`, requestOptions);
         getuser(id);
         newemailRef.current.value = '';
     }
