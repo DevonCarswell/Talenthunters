@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TalentHunters_BackEnd.Models.Enums;
 
 namespace TalentHunters_BackEnd.Models.Entities
@@ -10,11 +11,13 @@ namespace TalentHunters_BackEnd.Models.Entities
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
         public EmployeeRole EmployeeRole { get; set; }
         /*public Division? Division { get; set; }*/
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
+  
         public string Email { get;  set; }
-
+  
         public string HashedPassword { get;  set; }
 
  

@@ -58,3 +58,8 @@ i:hover {
 h1 {
     text-align: center;
 }
+
+div {
+    justify-content: center;
+    text-align: center;
+}

@@ -6,6 +6,7 @@ const context = [
     "/employee/add-employee",
     "/employee/update-employee-email",
     "/employee/delete-employee",
+    "/employee/get-roles",
     "/division/get-divisions",
     "/division/get-division",
     "/division/add-division",

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
+
 
 
 
@@ -9,9 +10,10 @@ function ReactComponent() {
         email: "",
         password: "",
         firstname: "",
-        lastname: ""
-        /*role: 0*/
+        lastname: "",
+        role: 0
     })
+    const [role, setRole] = useState(["None"])
 
     const handleChange = (e) =>
     {
@@ -25,7 +27,12 @@ function ReactComponent() {
             }
         })
     }
-  
+  async function getEmployeeRoles(){
+           fetch(`/employee/get-roles`)
+            .then(response => response.json())
+            .then(json => setRole(json))
+  }
+
     async function adduser() {
         const newUser = {
             'Email': user.email, 'HashedPassword': user.password,
@@ -41,27 +48,35 @@ function ReactComponent() {
     }
 
     
+    useEffect(() => {
+        getEmployeeRoles();
+    }, [])
 
+    console.log(role)
     return (
         <>
+        <div>
+            <form>
             <h2>Employee Data</h2>
-            <label>Email*</label>
+            <label>Email</label>  <br/>
             <input placeholder="Email"
-                id="userEmail" name="email" value={user.email} onChange= {handleChange} required /> 
-            <label>Password*</label>
+                id="userEmail" name="email" value={user.email} onChange= {handleChange} required /> <br/><br/>
+            <label>Password</label> <br/>
             <input placeholder="Password"
-                id="userPassword" name="password" type="password" value={user.password} onChange={handleChange} required />
-            <label>First Name*</label>
+                id="userPassword" name="password" type="password" value={user.password} onChange={handleChange} required />  <br/><br/>
+            <label>First Name</label>  <br/>
             <input placeholder="Firstname"
-                id="firstname" name="firstname" type="text" value={user.firstname} onChange={handleChange} required />
-            <label>Last Name*</label>
+                id="firstname" name="firstname" type="text" value={user.firstname} onChange={handleChange} required /> <br/><br/>
+            <label>Last Name</label>  <br/>
             <input placeholder="Lastname"
-                id="lastname" name="lastname" type="text" value={user.lastname} onChange={handleChange} required />
+                id="lastname" name="lastname" type="text" value={user.lastname} onChange={handleChange} required /> <br/><br/>
                
 
-            <Button onClick={() => adduser()} text="Add User" />
+            <Button onClick={() => adduser()} text="Add User" /> <br/><br/>
 
-                    <h4>* are required</h4>
+            </form>      
+
+                    </div>
         </>
     );
 }

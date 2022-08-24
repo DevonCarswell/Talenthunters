@@ -3,6 +3,7 @@ using TalentHunters_BackEnd.DAL;
 using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models;
 using TalentHunters_BackEnd.Models.Entities;
+using TalentHunters_BackEnd.Models.Enums;
 using TalentHunters_BackEnd.Utilities;
 
 namespace TalentHunters_BackEnd.Controllers
@@ -49,6 +50,13 @@ namespace TalentHunters_BackEnd.Controllers
         public async Task DeleteEmployee(long id)
         {
            await _employeeService.DeleteEmployee(id);
+        }
+
+        [HttpGet("get-roles")]
+        public List<EmployeeRole> GetRoles()
+        {
+            var roles = Enum.GetValues(typeof(EmployeeRole)).Cast<EmployeeRole>().ToList();
+            return roles;
         }
     };
 
