@@ -30,6 +30,16 @@ namespace TalentHunters_BackEnd
             // services.AddControllersWithViews();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDivisionService, DivisionService>();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.WriteIndented = true;
+
+                // serialize enums as strings in api responses (e.g. Role)
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+                // ignore omitted parameters on models to enable optional params (e.g. User update)
+                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

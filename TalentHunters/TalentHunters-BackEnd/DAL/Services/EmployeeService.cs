@@ -31,10 +31,10 @@ namespace TalentHunters_BackEnd.DAL.Services
         public async Task AddEmployee(Employee employee)
         {
             employee.HashedPassword = SecurePasswordHasher.Hash(employee.HashedPassword);
-            if (employee.EmployeeRole == null)
-            {
-                employee.EmployeeRole = EmployeeRole.None;
-            }
+            // if (employee.EmployeeRole == null)
+            // {
+            //     employee.EmployeeRole = EmployeeRole.None;
+            // }
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
         }
