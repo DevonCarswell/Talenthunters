@@ -53,5 +53,10 @@ namespace TalentHunters_BackEnd.DAL.Services
             _context.Employees.Remove(employeeToDelete);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Employee>> GetEmployeesWithoutDivision()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
