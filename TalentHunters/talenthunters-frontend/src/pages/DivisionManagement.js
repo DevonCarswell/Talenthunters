@@ -54,11 +54,12 @@ const DivisionManagement = () => {
 
     }
 
-
+console.log(divisionId)
     return (
         <>
             {loading ? (
                 <>
+
                     <div className="queries">
                         <div>
                             <label>Get All Divisions</label><br />
@@ -107,10 +108,12 @@ const DivisionManagement = () => {
 
                                             {/* <Link to={{ pathname: `/${this.props.testvalue}`, query: { backUrl } }} />*/}
 
-                                            <td> {division.manager.firstName} </td>
+                                            <td> {division.manager.firstName}{" "} {division.manager.lastName}  </td>
                                             {/*<td>{division.manager}</td>*/}
                                             
-<td><Link onClick={getEmployeesByDivision(division.id)} to={{   pathname: `/get-employees-by-division/${division.id}` }}>Employees</Link> </td>
+{/* <td><Link onClick={() => getEmployeesByDivision(division.id)} to={{   pathname: `/employee-management` }}>Employees</Link> </td> */}
+
+<td value={division.id}> <Link to={`/division-management/employees/`} state={{id: division.id, name: division.name}}>Employees</Link> </td>
 
 {/* <td><Link to="/division-management" onClick={() => getEmployeesByDivision(division.id)}>Employees</Link> </td> */}
                                             {/* TODO employeeRole separation*/}

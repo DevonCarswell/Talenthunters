@@ -7,6 +7,7 @@ import Contacts from './pages/Contacts';
 import EmployeeManagement from './pages/EmployeeManagement';
 import DivisionManagement from './pages/DivisionManagement';
 import AddEmployee from './pages/AddEmployee'
+import DivisionEmployee from './pages/DivisionEmployee'
 
 
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path='/contacts' element={<Contacts />} />
                 <Route path='/employee-management' element={<EmployeeManagement />} />
                 <Route path='/division-management' element={<DivisionManagement />} />
+                <Route path='/division-management/employees' element={<DivisionEmployee />} />
                 <Route path='/addemployee' element={<AddEmployee />} />
             </Route>
         </Routes>

@@ -42,7 +42,11 @@ const employeeManagement = () => {
 
     }
 
-
+    const getEmployeesByDivision = (id) =>{
+        fetch(`/division/get-employees-by-division/${id}`)
+            .then(response => response.json())
+            .then(json => setData(json))
+    }
     
 
 
