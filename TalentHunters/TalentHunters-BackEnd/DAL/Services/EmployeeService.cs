@@ -36,6 +36,7 @@ namespace TalentHunters_BackEnd.DAL.Services
             //     employee.EmployeeRole = EmployeeRole.None;
             // }
             _context.Employees.Add(employee);
+
             await _context.SaveChangesAsync();
         }
 

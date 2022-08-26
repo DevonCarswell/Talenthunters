@@ -25,13 +25,13 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task<Division> GetDivisionById(long id)
         {
-            var division = _context.Divisions.Include(d => d.Manager).Include(d => d.Employees).FirstAsync(div => div.Id == id);
+            var division = _context.Divisions.FirstAsync(div => div.Id == id);
             return await division;
         }
 
         public async Task<List<Division>> GetAllDivisions()
         {
-            var divisions = _context.Divisions.Include(d => d.Manager).Include(d => d.Employees).ToListAsync();
+            var divisions = _context.Divisions.ToListAsync();
             return await divisions;
         }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Button from '../components/Button';
 import '../App.css';
 
 const DivisionEmployee = () => {
@@ -25,7 +26,12 @@ const DivisionEmployee = () => {
      
 
     return (
-            <>
+        <>
+    <div class="container">
+        <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+        <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+        </div>
+
             <h3>Employees of {name} division</h3>
                 <div>
                     {data.length >= 1  ?
@@ -76,8 +82,10 @@ const DivisionEmployee = () => {
                                     <td>  {data.firstName} </td>
                                 <td>  {data.lastName} </td>
                             <td> {data.email} </td>
-                            <td> {data.employeeRole} </td>
-                            <td> {new Date(data.registrationDate).toLocaleString()} </td>
+                                <td> {data.employeeRole} </td>
+    {data.length !== 0 ? 
+                                    <td> {new Date(data.registrationDate).toLocaleString()} </td>
+    : <td> </td>}
                                                 </tr>
     
                             </tbody>

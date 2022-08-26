@@ -60,6 +60,11 @@ function AddDivision() {
 
     return (
         <>
+
+    <div class="container">
+        <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+        <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+        </div>
             <h2>Division Data</h2>
             <label>Name</label> {" "}<br /><br />
             <input placeholder="Name"

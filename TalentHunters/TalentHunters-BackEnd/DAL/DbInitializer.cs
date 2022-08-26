@@ -18,19 +18,19 @@ namespace TalentHunters_BackEnd.DAL
 
             var user1 = new Employee()
             {
-                Email = "zsolt@zsolt.hu",
+                Email = "zsolt.kasza@talenthunters.com",
                 FirstName = "Zsolt",
                 LastName = "Kasza",
                 EmployeeRole = EmployeeRole.BackEndDeveloper,
-                HashedPassword = SecurePasswordHasher.Hash("1234")
+                HashedPassword = SecurePasswordHasher.Hash("R5DGnJvV")
             };
             var user2 = new Employee()
             {
-                Email = "dalma@dalma.hu",
+                Email = "dalma.csernok@talenthunters.com",
                 FirstName = "Dalma",
                 LastName = "Csernok",
                 EmployeeRole = EmployeeRole.FrontEndDeveloper,
-                HashedPassword = SecurePasswordHasher.Hash("4567")
+                HashedPassword = SecurePasswordHasher.Hash("7KHnP4yZ")
             };
 
             // context.Employees.AddRange(new List<Employee>{user2,user1});
@@ -38,42 +38,75 @@ namespace TalentHunters_BackEnd.DAL
             {
                 Name = "Front End Developers",
                 Manager = user2,
+                Employees = new HashSet<Employee>()
+                {
+                    new Employee()
+                    {
+                        Email = "bela.ribizli@talenthunters.com",
+                        FirstName = "Ribizli",
+                        LastName = "Béla",
+                        EmployeeRole = EmployeeRole.FrontEndDeveloper,
+                        HashedPassword = SecurePasswordHasher.Hash("63mu7tHZ")
+                    },
+                    new Employee()
+                    {
+                        Email = "krisztina.korte@talenthunters.com",
+                        FirstName = "Körte",
+                        LastName = "Krisztina",
+                        EmployeeRole = EmployeeRole.FrontEndDeveloper,
+                        HashedPassword = SecurePasswordHasher.Hash("Lczty801")
+                    },
+                    
+                }
             };
 
             var division2 = new Division()
             {
                 Name = "Back End Developers",
-                Manager = user1
+                Manager = user1,
+                //Employees = new HashSet<Employee>()
+                //{
+                //new Employee()
+                //{
+                //Email = "kazmer.kiwi@talenthunters.com",
+                //FirstName = "Kiwi",
+                //LastName = "Kázmér",
+                //EmployeeRole = EmployeeRole.BackEndDeveloper,
+                //HashedPassword = SecurePasswordHasher.Hash("mFKWtb9Y")
             };
+        
+
+
+            
 
             var division3 = new Division()
             {
                 Name = "Manual Testers",
                 Manager = new Employee()
                 {
-                    Email = "viktor@viktor.com",
+                    Email = "viktor.ollo@talenthunters.com",
                     FirstName = "Viktor",
                     LastName = "Olló",
                     EmployeeRole = EmployeeRole.ManualTester,
-                    HashedPassword = SecurePasswordHasher.Hash("jános")
+                    HashedPassword = SecurePasswordHasher.Hash("VTEp8Edi")
                 },
                 Employees = new HashSet<Employee>()
                 {
                     new Employee()
                     {
-                        Email = "alma@alma.com",
+                        Email = "alma.peter@talenthunters.com",
                         FirstName = "Alma",
-                        LastName = "Banán",
+                        LastName = "Péter",
                         EmployeeRole = EmployeeRole.ManualTester,
-                        HashedPassword = SecurePasswordHasher.Hash("jglmindg")
+                        HashedPassword = SecurePasswordHasher.Hash("HHtJ4Jhh")
                     },
                     new Employee()
                     {
-                        Email = "banán@banán.com",
+                        Email = "banan.balint@talenthunters.com",
                         FirstName = "Banán",
                         LastName = "Bálint",
                         EmployeeRole = EmployeeRole.ManualTester,
-                        HashedPassword = SecurePasswordHasher.Hash("aaa14578")
+                        HashedPassword = SecurePasswordHasher.Hash("FdsJo6f8")
                     },
                 }
             };

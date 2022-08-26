@@ -55,6 +55,11 @@ function ReactComponent() {
 
     return (
         <>
+    <div class="container">
+        <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+        <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+        </div>
+
             <div>
                 <form>
                     <h2>Employee Data</h2>
@@ -72,7 +77,7 @@ function ReactComponent() {
                         id="lastname" name="lastname" type="text" value={user.lastname} onChange={handleChange} required /> <br /><br />
                     <div>
                         <label>
-                            Role</label>
+                            Role</label> <br />
                         <select name="role" value={user.role} onChange={handleChange}>
                             {roles.map((r, index) => (
                                 <option key={index} value={r.value}>{r}</option>

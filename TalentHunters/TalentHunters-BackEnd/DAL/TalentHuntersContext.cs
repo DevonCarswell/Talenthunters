@@ -3,6 +3,8 @@ using TalentHunters_BackEnd.Models.Entities;
 
 namespace TalentHunters_BackEnd.DAL
 {
+
+    // disable lazy loading
     public class TalentHuntersContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
@@ -16,6 +18,8 @@ namespace TalentHunters_BackEnd.DAL
         {
             modelBuilder.Entity<Employee>().ToTable("Employee");
             modelBuilder.Entity<Division>().ToTable("Division");
+            modelBuilder.Entity<Division>().Navigation(x => x.Employees).AutoInclude();
+            modelBuilder.Entity<Division>().Navigation(x => x.Manager).AutoInclude();
         }
 
 

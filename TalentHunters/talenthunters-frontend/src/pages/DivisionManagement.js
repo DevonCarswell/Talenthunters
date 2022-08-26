@@ -12,8 +12,7 @@ const DivisionManagement = () => {
 
     const [data, setData] = useState([{}]);
     const [employee, setEmployee] = useState([{}]);
-    // dummy data to managers state
-    const [managers, setManagers] = useState([{ firstName: "kamu firstname ", lastName: "kamu lasname" }]);
+  
     const [loading, setLoading] = useState(false);
     const [divisionId, setDivisionId] = useState("");
 
@@ -26,9 +25,9 @@ const DivisionManagement = () => {
         setLoading(true)
     };
 
-    
 
-    
+
+
     async function getdivision(divisionId) {
         await fetch(`/division/get-division/${divisionId}`)
             .then(response => response.json())
@@ -39,12 +38,12 @@ const DivisionManagement = () => {
     }
 
     async function getEmployeesByDivision(id) {
-    await fetch(`/division/get-employees-by-division/${id}`)
-        .then(response => response.json())
-        .then(json => setEmployee(json))
+        await fetch(`/division/get-employees-by-division/${id}`)
+            .then(response => response.json())
+            .then(json => setEmployee(json))
 
     };
-   
+
 
     async function deletedivision(id) {
         await fetch(`/division/delete-division/${id}`,
@@ -54,11 +53,14 @@ const DivisionManagement = () => {
 
     }
 
-console.log(divisionId)
     return (
         <>
             {loading ? (
                 <>
+                <div class="container">
+                    <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+                    <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+                    </div>
 
                     <div className="queries">
                         <div>
@@ -110,12 +112,12 @@ console.log(divisionId)
 
                                             <td> {division.manager.firstName}{" "} {division.manager.lastName}  </td>
                                             {/*<td>{division.manager}</td>*/}
-                                            
-{/* <td><Link onClick={() => getEmployeesByDivision(division.id)} to={{   pathname: `/employee-management` }}>Employees</Link> </td> */}
 
-<td value={division.id}> <Link to={`/division-management/employees/`} state={{id: division.id, name: division.name}}>Employees</Link> </td>
 
-{/* <td><Link to="/division-management" onClick={() => getEmployeesByDivision(division.id)}>Employees</Link> </td> */}
+
+                                            <td value={division.id}> <Link to={`/division-management/employees/`} state={{ id: division.id, name: division.name }}>Employees</Link> </td>
+
+
                                             {/* TODO employeeRole separation*/}
 
 
@@ -145,6 +147,7 @@ console.log(divisionId)
                                             }
                                         </td>
                                         {/*<td> {data.Employees} </td>*/}
+                                        <td value={data.id}> <Link to={`/division-management/employees/`} state={{ id: data.id, name: data.name }}>Employees</Link> </td>
                                         <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deletedivision(data.id)} />}</td>
                                     </tr>
 

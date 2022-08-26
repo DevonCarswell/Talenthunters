@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import '../App.css';
 
+//response.text() if we will use Actionresult
+
 
 const employeeManagement = () => {
     // const [category, setCategory] = useState("employee")
@@ -68,10 +70,16 @@ const employeeManagement = () => {
         getusers();
     }, [])
 
-
+      
+        
 
     return (
         <>
+    <div class="container">
+                <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text= "Employee Management" /></Link ></div>
+                <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+        </div>
+
             <div className="queries">
                 <div>
                     <label>Get All User</label><br />

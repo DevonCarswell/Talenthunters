@@ -63,3 +63,13 @@ div {
     justify-content: center;
     text-align: center;
 }
+
+.container {
+    display: flex;
+}
+
+.column-left,
+.column-right {
+
+    width: 50%;
+}

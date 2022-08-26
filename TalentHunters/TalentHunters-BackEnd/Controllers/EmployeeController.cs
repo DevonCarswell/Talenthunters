@@ -18,11 +18,23 @@ namespace TalentHunters_BackEnd.Controllers
         {
             _employeeService = employeeService;
         }
-
+       
         [HttpGet]
         [Route("get-employees")]
         public async Task<List<Employee>> GetAllEmployees()
         {
+            // Return Task<IQueryable>
+            //var employeList = _employeeService.GetAllEmployees();
+            //var employees = employeList.Result.Select(emp => new
+            //{
+            //    emp.Id,
+            //    emp.FirstName,
+            //    emp.LastName,
+            //    emp.Email,
+            //    emp.RegistrationDate,
+            //    emp.EmployeeRole
+
+            //});
             return await _employeeService.GetAllEmployees();
         }
 
