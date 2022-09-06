@@ -84,6 +84,12 @@ namespace TalentHunters_BackEnd.Controllers
         public Task<List<string>> GetAllEmails(){
             return _employeeService.GetAllEmails();
         }
+
+        [HttpGet("login")]
+        public Task<Employee> AuthenticateAsync(string email, string password)
+        {
+            return _employeeService.AuthenticateAsync(email, password);
+        }
     };
 
 }

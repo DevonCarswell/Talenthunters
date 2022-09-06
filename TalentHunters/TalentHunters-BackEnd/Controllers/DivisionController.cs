@@ -4,9 +4,11 @@ using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models;
 using TalentHunters_BackEnd.Models.Entities;
 using TalentHunters_BackEnd.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TalentHunters_BackEnd.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("[controller]")]
     public class DivisionController : ControllerBase

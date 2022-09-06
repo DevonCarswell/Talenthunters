@@ -16,5 +16,7 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
         Task<List<Employee>> GetEmployeesWithoutDivision();
 
         Task<List<string>> GetAllEmails();
+
+        Task<Employee> AuthenticateAsync(string email, string password);
     }
 }
