@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import '../App.css';
 
+//response.text() if we will use Actionresult
 
-const management = () => {
+
+const employeeManagement = () => {
     // const [category, setCategory] = useState("employee")
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
@@ -16,16 +18,16 @@ const management = () => {
 
 
     const getusers = async () => {
-        fetch(`/manager/get-employees`)
+        fetch(`/employee/get-employees`)
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);
     };
-
+    console.log(data);
 
      async function getuser(userId) {
         // const id = inputRef.current.value;
-         fetch(`/manager/get-employee/${userId}`)
+         fetch(`/employee/get-employee/${userId}`)
             .then(response => response.json())
             .then(json => setData(json))
         setUserId("")
@@ -35,14 +37,18 @@ const management = () => {
 
 
     async function deleteuser(id) {
-        await fetch(`/manager/delete-employee/${id}`,
+        await fetch(`/employee/delete-employee/${id}`,
             { method: 'DELETE' }
         );
         getusers();
 
     }
 
-
+    const getEmployeesByDivision = (id) =>{
+        fetch(`/division/get-employees-by-division/${id}`)
+            .then(response => response.json())
+            .then(json => setData(json))
+    }
     
 
 
@@ -53,7 +59,7 @@ const management = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEmail)
         };
-        await fetch(`/manager/update-employee-email/${id}`, requestOptions);
+        await fetch(`/employee/update-employee-email/${id}`, requestOptions);
         getuser(id);
         newemailRef.current.value = '';
     }
@@ -64,10 +70,16 @@ const management = () => {
         getusers();
     }, [])
 
-
+      
+        
 
     return (
         <>
+    <div class="container">
+                <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text= "Employee Management" /></Link ></div>
+                <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+        </div>
+
             <div className="queries">
                 <div>
                     <label>Get All User</label><br />
@@ -164,4 +176,4 @@ const management = () => {
 
 
 
-export default management;
+export default employeeManagement;

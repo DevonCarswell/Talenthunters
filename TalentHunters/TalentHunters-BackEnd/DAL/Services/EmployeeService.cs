@@ -18,24 +18,25 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task<Employee> GetEmployeeById(long id)
         {
-            var employee =  _context.Users.FirstAsync(u => u.Id == id);
+            var employee =  _context.Employees.FirstAsync(u => u.Id == id);
             return await employee;
         }
 
         public async Task<List<Employee>> GetAllEmployees()
         {
-            var employees = _context.Users.ToListAsync();
+            var employees = _context.Employees.ToListAsync();
             return await employees;
         }
 
         public async Task AddEmployee(Employee employee)
         {
             employee.HashedPassword = SecurePasswordHasher.Hash(employee.HashedPassword);
-            if (employee.EmployeeRole == null)
-            {
-                employee.EmployeeRole = EmployeeRole.None;
-            }
-            _context.Users.Add(employee);
+            // if (employee.EmployeeRole == null)
+            // {
+            //     employee.EmployeeRole = EmployeeRole.None;
+            // }
+            _context.Employees.Add(employee);
+
             await _context.SaveChangesAsync();
         }
 
@@ -50,8 +51,13 @@ namespace TalentHunters_BackEnd.DAL.Services
         public async Task DeleteEmployee(long id)
         {
             var employeeToDelete = GetEmployeeById(id).Result;
-            _context.Users.Remove(employeeToDelete);
+            _context.Employees.Remove(employeeToDelete);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Employee>> GetEmployeesWithoutDivision()
+        {
+            throw new NotImplementedException();
         }
     }
 }

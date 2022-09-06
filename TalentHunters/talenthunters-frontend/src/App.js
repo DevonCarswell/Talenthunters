@@ -4,8 +4,11 @@ import Home from './pages/Home';
 import Layout from './pages/Layout';
 import About from './pages/About';
 import Contacts from './pages/Contacts';
-import Management from './pages/Management';
+import EmployeeManagement from './pages/EmployeeManagement';
+import DivisionManagement from './pages/DivisionManagement';
 import AddEmployee from './pages/AddEmployee'
+import AddDivision from './pages/AddDivision'
+import DivisionEmployee from './pages/DivisionEmployee'
 
 
 
@@ -17,8 +20,11 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/contacts' element={<Contacts />} />
-                <Route path='/management' element={<Management />} />
+                <Route path='/employee-management' element={<EmployeeManagement />} />
+                <Route path='/division-management' element={<DivisionManagement />} />
+                <Route path='/division-management/employees' element={<DivisionEmployee />} />
                 <Route path='/addemployee' element={<AddEmployee />} />
+                <Route path='/adddivision' element={<AddDivision />} />
             </Route>
         </Routes>
 

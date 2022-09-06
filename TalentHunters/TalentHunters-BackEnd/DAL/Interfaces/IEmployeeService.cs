@@ -12,5 +12,7 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
         //void DeleteEmployee(Guid id);
         void UpdateEmployeeEmail(long id, string email);
         Task DeleteEmployee(long id);
+
+        Task<List<Employee>> GetEmployeesWithoutDivision();
     }
 }

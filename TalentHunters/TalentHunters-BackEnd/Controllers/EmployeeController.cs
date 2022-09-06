@@ -3,25 +3,38 @@ using TalentHunters_BackEnd.DAL;
 using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models;
 using TalentHunters_BackEnd.Models.Entities;
+using TalentHunters_BackEnd.Models.Enums;
 using TalentHunters_BackEnd.Utilities;
 
 namespace TalentHunters_BackEnd.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ManagerController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
 
-        public ManagerController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }
-
+       
         [HttpGet]
         [Route("get-employees")]
         public async Task<List<Employee>> GetAllEmployees()
         {
+            // Return Task<IQueryable>
+            //var employeList = _employeeService.GetAllEmployees();
+            //var employees = employeList.Result.Select(emp => new
+            //{
+            //    emp.Id,
+            //    emp.FirstName,
+            //    emp.LastName,
+            //    emp.Email,
+            //    emp.RegistrationDate,
+            //    emp.EmployeeRole
+
+            //});
             return await _employeeService.GetAllEmployees();
         }
 
@@ -49,6 +62,13 @@ namespace TalentHunters_BackEnd.Controllers
         public async Task DeleteEmployee(long id)
         {
            await _employeeService.DeleteEmployee(id);
+        }
+
+        [HttpGet("get-roles")]
+        public List<EmployeeRole> GetRoles()
+        {
+            var roles = Enum.GetValues(typeof(EmployeeRole)).Cast<EmployeeRole>().ToList();
+            return roles;
         }
     };
 
