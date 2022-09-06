@@ -23,7 +23,7 @@ const employeeManagement = () => {
             .then(json => setData(json))
         setLoading(false);
     };
-    console.log(data);
+
 
      async function getuser(userId) {
         // const id = inputRef.current.value;

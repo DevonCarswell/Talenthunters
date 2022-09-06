@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TalentHunters_BackEnd.DAL;
 using TalentHunters_BackEnd.DAL.Interfaces;
@@ -8,6 +9,7 @@ using TalentHunters_BackEnd.Utilities;
 
 namespace TalentHunters_BackEnd.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
@@ -18,7 +20,8 @@ namespace TalentHunters_BackEnd.Controllers
         {
             _employeeService = employeeService;
         }
-       
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("get-employees")]
         public async Task<List<Employee>> GetAllEmployees()
@@ -38,18 +41,21 @@ namespace TalentHunters_BackEnd.Controllers
             return await _employeeService.GetAllEmployees();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("get-employee/{id}")]
         public async Task<Employee> GetEmployeeById(long id)
         {
             return await _employeeService.GetEmployeeById(id);
         }
 
+        [AllowAnonymous]
         [HttpPost("add-employee")]
         public async Task AddEmployee([FromBody] Employee emp)
         {
             await _employeeService.AddEmployee(emp);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("update-employee-email/{id}")]
         public void UpdateEmployeeEmailById(long id, [FromBody] string email)
         {
@@ -58,12 +64,14 @@ namespace TalentHunters_BackEnd.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("delete-employee/{id}")]
         public async Task DeleteEmployee(long id)
         {
            await _employeeService.DeleteEmployee(id);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("get-roles")]
         public List<EmployeeRole> GetRoles()
         {
@@ -71,6 +79,7 @@ namespace TalentHunters_BackEnd.Controllers
             return roles;
         }
 
+        [AllowAnonymous]
         [HttpGet("get-emails")]
         public Task<List<string>> GetAllEmails(){
             return _employeeService.GetAllEmails();

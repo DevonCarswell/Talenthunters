@@ -22,7 +22,8 @@ namespace TalentHunters_BackEnd.DAL
                 FirstName = "Zsolt",
                 LastName = "Kasza",
                 EmployeeRole = EmployeeRole.BackEndDeveloper,
-                HashedPassword = SecurePasswordHasher.Hash("R5DGnJvV")
+                HashedPassword = SecurePasswordHasher.Hash("R5DGnJvV"),
+                Role = "Admin"
             };
             var user2 = new Employee()
             {
@@ -30,7 +31,8 @@ namespace TalentHunters_BackEnd.DAL
                 FirstName = "Dalma",
                 LastName = "Csernok",
                 EmployeeRole = EmployeeRole.FrontEndDeveloper,
-                HashedPassword = SecurePasswordHasher.Hash("7KHnP4yZ")
+                HashedPassword = SecurePasswordHasher.Hash("7KHnP4yZ"),
+                Role = "Admin"
             };
 
             // context.Employees.AddRange(new List<Employee>{user2,user1});
@@ -46,7 +48,8 @@ namespace TalentHunters_BackEnd.DAL
                         FirstName = "Ribizli",
                         LastName = "Béla",
                         EmployeeRole = EmployeeRole.FrontEndDeveloper,
-                        HashedPassword = SecurePasswordHasher.Hash("63mu7tHZ")
+                        HashedPassword = SecurePasswordHasher.Hash("63mu7tHZ"),
+                        Role = "Employee"
                     },
                     new Employee()
                     {
@@ -54,7 +57,8 @@ namespace TalentHunters_BackEnd.DAL
                         FirstName = "Körte",
                         LastName = "Krisztina",
                         EmployeeRole = EmployeeRole.FrontEndDeveloper,
-                        HashedPassword = SecurePasswordHasher.Hash("Lczty801")
+                        HashedPassword = SecurePasswordHasher.Hash("Lczty801"),
+                        Role = "Employee"
                     },
                     
                 }
@@ -88,7 +92,8 @@ namespace TalentHunters_BackEnd.DAL
                     FirstName = "Viktor",
                     LastName = "Olló",
                     EmployeeRole = EmployeeRole.ManualTester,
-                    HashedPassword = SecurePasswordHasher.Hash("VTEp8Edi")
+                    HashedPassword = SecurePasswordHasher.Hash("VTEp8Edi"),
+                    Role = "Employee"
                 },
                 Employees = new HashSet<Employee>()
                 {
@@ -98,7 +103,8 @@ namespace TalentHunters_BackEnd.DAL
                         FirstName = "Alma",
                         LastName = "Péter",
                         EmployeeRole = EmployeeRole.ManualTester,
-                        HashedPassword = SecurePasswordHasher.Hash("HHtJ4Jhh")
+                        HashedPassword = SecurePasswordHasher.Hash("HHtJ4Jhh"),
+                        Role = "Employee"
                     },
                     new Employee()
                     {
@@ -106,7 +112,8 @@ namespace TalentHunters_BackEnd.DAL
                         FirstName = "Banán",
                         LastName = "Bálint",
                         EmployeeRole = EmployeeRole.ManualTester,
-                        HashedPassword = SecurePasswordHasher.Hash("FdsJo6f8")
+                        HashedPassword = SecurePasswordHasher.Hash("FdsJo6f8"),
+                        Role = "Employee"
                     },
                 }
             };

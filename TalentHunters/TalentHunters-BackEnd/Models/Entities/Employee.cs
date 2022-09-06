@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using TalentHunters_BackEnd.Models.Enums;
 
 namespace TalentHunters_BackEnd.Models.Entities
@@ -20,7 +21,10 @@ namespace TalentHunters_BackEnd.Models.Entities
   
         public string HashedPassword { get;  set; }
 
- 
+        public string? Role { get; set; }
+
+        
+
 
 
         //public User(string email, string hashedPassword)
