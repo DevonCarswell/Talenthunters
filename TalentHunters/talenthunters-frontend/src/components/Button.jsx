@@ -1,9 +1,9 @@
 import React from 'react';
 import '../App.css';
 
-function ReactComponent({onClick, text}) {
+function ReactComponent({onClick, text, disabled}) {
   return (
-      <button className="button" onClick={onClick} variant="outlined">{text}  </button>
+      <button disabled={disabled} className="button" onClick={onClick} variant="outlined">{text} </button>
   );
 }
 

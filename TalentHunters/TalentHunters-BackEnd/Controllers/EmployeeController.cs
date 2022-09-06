@@ -70,6 +70,11 @@ namespace TalentHunters_BackEnd.Controllers
             var roles = Enum.GetValues(typeof(EmployeeRole)).Cast<EmployeeRole>().ToList();
             return roles;
         }
+
+        [HttpGet("get-emails")]
+        public Task<List<string>> GetAllEmails(){
+            return _employeeService.GetAllEmails();
+        }
     };
 
 }

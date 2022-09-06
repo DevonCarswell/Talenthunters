@@ -15,7 +15,7 @@ const home = () => {
             </form>
             <br />
             <Link to="/">Forgot your password?</Link><br />
-            <Link to="/">Click here, to register.</Link>
+            <Link to="/registration">Click here, to register.</Link>
         </div>
     );
 }

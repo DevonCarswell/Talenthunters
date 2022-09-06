@@ -14,5 +14,7 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
         Task DeleteEmployee(long id);
 
         Task<List<Employee>> GetEmployeesWithoutDivision();
+
+        Task<List<string>> GetAllEmails();
     }
 }

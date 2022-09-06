@@ -59,5 +59,11 @@ namespace TalentHunters_BackEnd.DAL.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<string>> GetAllEmails()
+        {
+            var emails = _context.Employees.Select(emp => emp.Email).ToListAsync();
+            return await emails;
+        }
     }
 }
