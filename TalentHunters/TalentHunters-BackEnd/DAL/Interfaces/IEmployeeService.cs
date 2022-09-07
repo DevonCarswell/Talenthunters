@@ -1,4 +1,5 @@
-﻿using TalentHunters_BackEnd.Models.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using TalentHunters_BackEnd.Models.Entities;
 
 namespace TalentHunters_BackEnd.DAL.Interfaces
 {

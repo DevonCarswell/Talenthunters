@@ -86,9 +86,15 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [HttpGet("login")]
-        public Task<Employee> AuthenticateAsync(string email, string password)
+        public IActionResult AuthenticateAsync(string email, string password)
         {
-            return _employeeService.AuthenticateAsync(email, password);
+            var employee = _employeeService.AuthenticateAsync(email, password);
+            if (employee != null)
+            {
+                return Ok(employee);
+            }
+
+            return NotFound();
         }
     };
 

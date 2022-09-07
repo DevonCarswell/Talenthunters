@@ -49,16 +49,30 @@ namespace TalentHunters_BackEnd.Auth
             string email = userInfoDecoded.Split(":")[0];
             string password = userInfoDecoded.Split(":")[1];
             string hashedPassword = Utilities.SecurePasswordHasher.Hash(password);
-            var employees = _employeeService.GetAllEmployees().Result;
-            Employee employee = employees.FirstOrDefault(employee => employee.Email == email && employee.HashedPassword == hashedPassword);
+            var employee = _employeeService.GetAllEmployees().Result.FirstOrDefault(employee => employee.Email == email && employee.HashedPassword == hashedPassword);
 
-            var claims = new List<Claim>()
+            var claims = new List<Claim>();
+
+
+            if (employee is not null)
             {
-                new Claim(ClaimTypes.Name, employee.Email)
-            };
-            // add user roles as claims here
+                claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, employee.Email)
+                };
 
-            claims.Add(new Claim(ClaimTypes.Role, employee.Role));
+                claims.Add(new Claim(ClaimTypes.Role, employee.Role));
+
+            }
+            else
+            {
+                claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, "anonymous")
+                };
+
+                claims.Add(new Claim(ClaimTypes.Role, "anonymous"));
+            }
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);

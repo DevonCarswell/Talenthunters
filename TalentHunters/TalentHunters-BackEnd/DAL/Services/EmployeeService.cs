@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models.Entities;
 using TalentHunters_BackEnd.Models.Enums;
@@ -66,13 +67,12 @@ namespace TalentHunters_BackEnd.DAL.Services
             return await emails;
         }
 
-        public Task<Employee> AuthenticateAsync(string email, string password)
+        public async Task<Employee> AuthenticateAsync(string email, string password)
         {
             var employees = GetAllEmployees().Result;
             var hashedPassword = Utilities.SecurePasswordHasher.Hash(password);
-            return Task.Run(() =>
-                employees
-                    .First(u => u.Email == email && u.HashedPassword == hashedPassword));
+            var employee = _context.Employees.FirstOrDefaultAsync(emp => emp.Email == email && emp.HashedPassword == password);
+            return await employee;
         }
     }
 }
