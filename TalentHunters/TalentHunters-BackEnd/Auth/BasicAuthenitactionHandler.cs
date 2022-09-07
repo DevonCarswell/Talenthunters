@@ -49,8 +49,16 @@ namespace TalentHunters_BackEnd.Auth
 
             string email = userInfoDecoded.Split(":")[0];
             string password = userInfoDecoded.Split(":")[1];
-            string hashedPassword = Utilities.SecurePasswordHasher.Hash(password);
-            var employee = _employeeService.GetAllEmployees().Result.FirstOrDefault(employee => employee.Email == email && employee.HashedPassword == hashedPassword);
+            var employee = _employeeService.GetAllEmployees().Result.FirstOrDefault(employee => employee.Email == email);
+            if (employee is not null)
+            {
+                if (!Utilities.SecurePasswordHasher.Verify(password, employee.HashedPassword))
+                {
+                    employee = null;
+                }
+            }
+            
+           
 
             var claims = new List<Claim>();
 
