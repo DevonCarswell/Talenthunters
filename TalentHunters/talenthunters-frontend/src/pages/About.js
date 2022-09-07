@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css'; 
 const about = () => {
+    console.log(localStorage.getItem('user'))
     return (
         <>
     <div className="blabla">

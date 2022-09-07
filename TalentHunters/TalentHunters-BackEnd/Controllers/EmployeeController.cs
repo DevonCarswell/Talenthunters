@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TalentHunters_BackEnd.Auth;
 using TalentHunters_BackEnd.DAL;
 using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models;
@@ -85,16 +86,20 @@ namespace TalentHunters_BackEnd.Controllers
             return _employeeService.GetAllEmails();
         }
 
-        [HttpGet("login")]
-        public IActionResult AuthenticateAsync(string email, string password)
+        [AllowAnonymous]
+        [HttpGet, HttpPost("login")]
+        public ActionResult<Employee> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
         {
-            var employee = _employeeService.AuthenticateAsync(email, password);
-            if (employee != null)
-            {
-                return Ok(employee);
-            }
+           var employee =  _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
+           if (employee is not null)
+           {
+               return Ok(employee.Result);
+           }
 
-            return NotFound();
+           return NoContent();
+
+
+
         }
     };
 

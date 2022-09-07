@@ -42,7 +42,8 @@ namespace TalentHunters_BackEnd.Auth
             //implement your authentication logic here
             var autorizationHeader = Request.Headers.Authorization.ToString();
 
-            string userInfoEncoded = new string(autorizationHeader.Skip(6).ToArray()); // Remove the "Basic " start of the header value
+            string userInfoEncoded = new string(autorizationHeader.Skip(6).ToArray()); 
+            // Remove the "Basic " start of the header value
 
             string userInfoDecoded = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(userInfoEncoded));
 

@@ -21,11 +21,9 @@ const employeeManagement = () => {
         fetch(`/employee/get-employees`, {
             method: "GET",
             headers: {"Content-type": "application/json;charset=UTF-8",
-        "Email": "dalma.csernok@talenthunters.com",
-        "Password": "7KHnP4yZ"
+            
         }
         })
-            .then()
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);

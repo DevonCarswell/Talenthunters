@@ -14,12 +14,15 @@ const home = () => {
         const employee = {
             'Email': user.email, 'Password': user.password
         };
+        console.log(employee)
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(employee)
         };
         await fetch('/employee/login', requestOptions)
+            // .then(response => response.json())
+            // .then(json => console.log(json))
             .then(handleResponse)
             .then(user => {
                 // login successful if there's a user in the response
@@ -34,7 +37,7 @@ const home = () => {
 
 
 
-            })}
+        })};
 
 
     const handleChange = (e) => {
@@ -48,7 +51,7 @@ const home = () => {
                 }
             })
         }
-
+        console.log(localStorage.getItem('user'))
         function logout() {
             // remove user from local storage to log user out
             localStorage.removeItem('user');
@@ -58,7 +61,7 @@ const home = () => {
             return response.text().then(text => {
                 const data = text && JSON.parse(text);
                 if (!response.ok) {
-                    if (response.status === 401) {
+                    if (response.status === 204) {
                         // auto logout if 401 response returned from api
                         logout();
                         // location.reload(true);
@@ -67,15 +70,15 @@ const home = () => {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-
+                
                 return data;
             });
         }
-
+        
         return (
+        
             <div className="text-center">
                 <h1>Login</h1>
-                <form>
                     <label>Email</label><br />
                     <input type="email" id="email" name="email" placeholder="example@gmail.com" value={user.email} onChange={handleChange}
                         required /><br /><br />
@@ -83,11 +86,11 @@ const home = () => {
                     <input type="password" id="password" name="password" placeholder="password" value={user.password} onChange={handleChange}
                         required /><br /><br />
                     <Button text="login" onClick={login} />
-                </form>
+
                 <br />
                 <Link to="/">Forgot your password?</Link><br />
                 <Link to="/registration">Click here, to register.</Link>
-            </div>
+            </div> 
         );
     }
 
