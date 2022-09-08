@@ -18,12 +18,18 @@ const employeeManagement = () => {
 
 
     const getusers = async () => {
-        fetch(`/employee/get-employees`)
+        fetch(`/employee/get-employees`, {
+            method: "GET",
+            headers: {"Content-type": "application/json;charset=UTF-8", 
+            'Authorization': 'Basic ' + btoa('zsolt.kasza@talenthunters.com:R5DGnJvV') 
+        }
+        
+        })
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(false);
     };
-    console.log(data);
+
 
      async function getuser(userId) {
         // const id = inputRef.current.value;

@@ -1,4 +1,5 @@
-﻿using TalentHunters_BackEnd.Models.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using TalentHunters_BackEnd.Models.Entities;
 
 namespace TalentHunters_BackEnd.DAL.Interfaces
 {
@@ -14,5 +15,9 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
         Task DeleteEmployee(long id);
 
         Task<List<Employee>> GetEmployeesWithoutDivision();
+
+        Task<List<string>> GetAllEmails();
+
+        Task<Employee>? AuthenticateAsync(string email, string password);
     }
 }

@@ -9,7 +9,7 @@ const contacts = () => {
             <div className="text-center">
                 <h1>Contacts</h1>
             </div>
-            <div className="container text-center">
+            <div className="text-center">
                 <h5>Dalma Csernok - CEO</h5>
                 <p><img src={Dalma} alt="" width="150" height="150" /></p>
                 <p>+36 30/644-2697</p>
