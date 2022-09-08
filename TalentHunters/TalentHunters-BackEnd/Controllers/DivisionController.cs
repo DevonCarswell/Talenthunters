@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TalentHunters_BackEnd.Controllers
 {
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("[controller]")]
     public class DivisionController : ControllerBase

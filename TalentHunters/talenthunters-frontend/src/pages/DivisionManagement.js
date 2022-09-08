@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import '../App.css';
+import AuthHeader from '../helper/AuthHeader';
 
 //TODO employee + divison management with dropdown button or dropdown menu
 const DivisionManagement = () => {
@@ -12,14 +13,23 @@ const DivisionManagement = () => {
 
     const [data, setData] = useState([{}]);
     const [employee, setEmployee] = useState([{}]);
-  
+
     const [loading, setLoading] = useState(false);
     const [divisionId, setDivisionId] = useState("");
+
+    const header = AuthHeader();
 
 
 
     const getdivisions = async () => {
-        await fetch(`/division/get-divisions`)
+        await fetch(`/division/get-divisions`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+                "Authorization": header
+            }
+
+        })
             .then(response => response.json())
             .then(json => setData(json))
         setLoading(true)
@@ -29,7 +39,14 @@ const DivisionManagement = () => {
 
 
     async function getdivision(divisionId) {
-        await fetch(`/division/get-division/${divisionId}`)
+        await fetch(`/division/get-division/${divisionId}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+                "Authorization": header
+            }
+
+        })
             .then(response => response.json())
             .then(json => setData(json))
         setDivisionId("")
@@ -38,7 +55,14 @@ const DivisionManagement = () => {
     }
 
     async function getEmployeesByDivision(id) {
-        await fetch(`/division/get-employees-by-division/${id}`)
+        await fetch(`/division/get-employees-by-division/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+                "Authorization": header
+            }
+
+        })
             .then(response => response.json())
             .then(json => setEmployee(json))
 
@@ -47,7 +71,13 @@ const DivisionManagement = () => {
 
     async function deletedivision(id) {
         await fetch(`/division/delete-division/${id}`,
-            { method: 'DELETE' }
+            {
+                method: 'DELETE',
+                headers: {
+                    "Content-type": "application/json;charset=UTF-8",
+                    "Authorization": header
+                }
+            }
         );
         getdivisions();
 
@@ -57,9 +87,9 @@ const DivisionManagement = () => {
         <>
             {loading ? (
                 <>
-                <div class="container">
-                    <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
-                    <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+                    <div class="container">
+                        <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+                        <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
                     </div>
 
                     <div className="queries">

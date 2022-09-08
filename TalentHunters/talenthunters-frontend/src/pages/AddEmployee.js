@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
-
+import AuthHeader from '../helper/AuthHeader';
 
 
 
@@ -13,8 +13,9 @@ function ReactComponent() {
         lastname: "",
         role: ""
     })
-  
+
     const [roles, setRoles] = useState(["None"])
+    const header = AuthHeader();
 
     const handleChange = (e) => {
         let value = e.target.value
@@ -28,7 +29,15 @@ function ReactComponent() {
         })
     }
     async function getEmployeeRoles() {
-        fetch(`/employee/get-roles`)
+        fetch(`/employee/get-roles`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json;charset=UTF-8",
+                    "Authorization": header
+                }
+
+            })
             .then(response => response.json())
             .then(json => setRoles(json))
     }
@@ -40,7 +49,10 @@ function ReactComponent() {
         };
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": header
+            },
             body: JSON.stringify(newUser)
         };
         await fetch('/employee/add-employee', requestOptions);
@@ -55,10 +67,10 @@ function ReactComponent() {
 
     return (
         <>
-    <div class="container">
-        <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
-        <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
-        </div>
+            <div class="container">
+                <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+                <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+            </div>
 
             <div>
                 <form>

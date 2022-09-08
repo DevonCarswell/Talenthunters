@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Button from '../components/Button';
 import '../App.css';
+import AuthHeader from '../helper/AuthHeader';
 
 const DivisionEmployee = () => {
     const [data, setData] = useState([{}]);
     const [name, setName] = useState("");
     const location = useLocation();
-  
+    const header = AuthHeader();
   
     useEffect(() => {
         getEmployeesByDivision(location.state.id)
@@ -17,7 +18,15 @@ const DivisionEmployee = () => {
 
    
     async function getEmployeesByDivision(id) {
-        await fetch(`/division/get-employees-by-division/${id}`)
+        await fetch(`/division/get-employees-by-division/${id}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json;charset=UTF-8",
+                        "Authorization": header
+                    }
+
+                })
             .then(response => response.json())
             .then(json => setData(json))
     

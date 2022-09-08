@@ -69,7 +69,7 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public Task<Employee>? AuthenticateAsync(string email, string password)
         {
-            var employee =  _context.Employees.FirstOrDefaultAsync(emp => emp.Email == email);
+            var employee =  _context.Employees.FirstAsync(emp => emp.Email == email);
             if (SecurePasswordHasher.Verify(password, employee.Result.HashedPassword))
             {
                 return employee;
