@@ -52,9 +52,10 @@ const home = () => {
             })
         }
         console.log(localStorage.getItem('user'))
+        console.log(user)
         function logout() {
             // remove user from local storage to log user out
-            localStorage.removeItem('user');
+            localStorage.clear();
         }
 
         function handleResponse(response) {
@@ -85,7 +86,8 @@ const home = () => {
                     <label>Password</label><br />
                     <input type="password" id="password" name="password" placeholder="password" value={user.password} onChange={handleChange}
                         required /><br /><br />
-                    <Button text="login" onClick={login} />
+                    <Button text="login" onClick={() => login()} />
+                    <Button text="logout" onClick={() => logout()} />
 
                 <br />
                 <Link to="/">Forgot your password?</Link><br />

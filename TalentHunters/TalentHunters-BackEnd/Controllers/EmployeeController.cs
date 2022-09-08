@@ -69,7 +69,7 @@ namespace TalentHunters_BackEnd.Controllers
         [HttpDelete("delete-employee/{id}")]
         public async Task DeleteEmployee(long id)
         {
-           await _employeeService.DeleteEmployee(id);
+            await _employeeService.DeleteEmployee(id);
         }
 
         [Authorize(Roles = "Admin")]
@@ -82,21 +82,32 @@ namespace TalentHunters_BackEnd.Controllers
 
         [AllowAnonymous]
         [HttpGet("get-emails")]
-        public Task<List<string>> GetAllEmails(){
+        public Task<List<string>> GetAllEmails()
+        {
             return _employeeService.GetAllEmails();
         }
 
         [AllowAnonymous]
         [HttpGet, HttpPost("login")]
-        public ActionResult<Employee> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
+        public ActionResult<IQueryable> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
         {
-           var employee =  _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
-           if (employee is not null)
-           {
-               return Ok(employee.Result);
-           }
 
-           return NoContent();
+            var employee = _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
+
+            if (employee is not null)
+            {
+                var dataToSend = new
+                {
+                    employee.Result.FirstName,
+                    employee.Result.LastName,
+                    employee.Result.Email,
+                    employee.Result.Role
+                };
+
+                return Ok(dataToSend);
+            }
+
+            return NoContent();
 
 
 

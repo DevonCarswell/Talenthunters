@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css'; 
+import '../App.css';
+import authHeader from '../helper/AuthHeader';
+
 const about = () => {
-    console.log(localStorage.getItem('user'))
+    const header = authHeader();
+    console.log(header);
+    console.log(`'Authorization': 'Basic ' + ${window.btoa('dalma.csernok@talenthunters.com:7KHnP4yZ')}`)
     return (
         <>
     <div className="blabla">

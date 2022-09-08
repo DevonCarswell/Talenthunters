@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import '../App.css';
+import AuthHeader from '../helper/AuthHeader';
 
 //response.text() if we will use Actionresult
 
@@ -15,15 +16,17 @@ const employeeManagement = () => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const newemailRef = useRef(null);
+    const header = AuthHeader();
+    console.log(header);
 
 
     const getusers = async () => {
         fetch(`/employee/get-employees`, {
             method: "GET",
-            headers: {"Content-type": "application/json;charset=UTF-8", 
-            'Authorization': 'Basic ' + btoa('zsolt.kasza@talenthunters.com:R5DGnJvV') 
-        }
-        
+            headers: {
+                "Content-type": "application/json;charset=UTF-8", header
+            }
+
         })
             .then(response => response.json())
             .then(json => setData(json))
@@ -31,9 +34,16 @@ const employeeManagement = () => {
     };
 
 
-     async function getuser(userId) {
+    async function getuser(userId) {
         // const id = inputRef.current.value;
-         fetch(`/employee/get-employee/${userId}`)
+        fetch(`/employee/get-employee/${userId}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json;charset=UTF-8", header
+                }
+
+            })
             .then(response => response.json())
             .then(json => setData(json))
         setUserId("")
@@ -44,25 +54,37 @@ const employeeManagement = () => {
 
     async function deleteuser(id) {
         await fetch(`/employee/delete-employee/${id}`,
-            { method: 'DELETE' }
+            {
+                method: 'DELETE',
+                headers: {
+                    "Content-type": "application/json;charset=UTF-8", header
+                }
+            }
         );
         getusers();
 
     }
 
-    const getEmployeesByDivision = (id) =>{
-        fetch(`/division/get-employees-by-division/${id}`)
+    const getEmployeesByDivision = (id) => {
+        fetch(`/division/get-employees-by-division/${id}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json;charset=UTF-8", header
+            }
+
+        })
             .then(response => response.json())
             .then(json => setData(json))
     }
-    
+
 
 
     async function updateemail(id) {
         const newEmail = newemailRef.current.value;
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', header},
             body: JSON.stringify(newEmail)
         };
         await fetch(`/employee/update-employee-email/${id}`, requestOptions);
@@ -70,21 +92,21 @@ const employeeManagement = () => {
         newemailRef.current.value = '';
     }
 
-   
+
 
     useEffect(() => {
         getusers();
     }, [])
 
-      
-        
+
+
 
     return (
         <>
-    <div class="container">
-                <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text= "Employee Management" /></Link ></div>
+            <div class="container">
+                <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
                 <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
-        </div>
+            </div>
 
             <div className="queries">
                 <div>
@@ -96,7 +118,7 @@ const employeeManagement = () => {
                 <div>
                     <br />
                     <label>Get single user by id</label> <br />
-                    <input placeholder="User Id" id="userid" value={userId} onChange={(e)=> setUserId(e.target.value)} />
+                    <input placeholder="User Id" id="userid" value={userId} onChange={(e) => setUserId(e.target.value)} />
                     <Button onClick={() => getuser(userId)} text="Search" />
                 </div>
                 <div>
@@ -107,7 +129,7 @@ const employeeManagement = () => {
                     {/*<input placeholder="Password"*/}
                     {/*    id="userPassword" type="password" ref={passwordRef} />*/}
                     <Link to='/addemployee' className="nav-link"> <Button text="Add Employee" /></Link>
-                    
+
                 </div>
 
 
@@ -161,16 +183,16 @@ const employeeManagement = () => {
                             <tr>
                                 <td value={data.id}> {data.id} </td>
                                 <td>  {data.firstName} </td>
-                            <td>  {data.lastName} </td>
-                        <td> {data.email} </td>
-                        <td> {data.employeeRole} </td>
-                        <td> {new Date(data.registrationDate).toLocaleString()} </td>
-                        <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
-                        <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
-                    </tr>
+                                <td>  {data.lastName} </td>
+                                <td> {data.email} </td>
+                                <td> {data.employeeRole} </td>
+                                <td> {new Date(data.registrationDate).toLocaleString()} </td>
+                                <td><input placeholder="new email" ref={newemailRef}></input><Button text="go" onClick={() => updateemail(data.id)} /></td>
+                                <td value={data.id}>{data.length === 0 ? '' : <Button text='X' onClick={() => deleteuser(data.id)} />}</td>
+                            </tr>
 
                         </tbody>
-        </table>}
+                    </table>}
             </div >
 
 
