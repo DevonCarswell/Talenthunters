@@ -1,16 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../images/logo.png';
+import userService from '../pages/Home';
 
 
 
 function CollapsibleExample() {
 
     let authUser = JSON.parse(localStorage.getItem('authUser'));
+    let navigate = useNavigate();
+
+    function logout() {
+        // remove user from local storage to log user out
+        localStorage.clear();
+        navigate("/");
+        window.location.reload();
+    }
+
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{ backgroundColor: '#07e3be' }}>
             <Container>
@@ -20,19 +30,19 @@ function CollapsibleExample() {
                     <Nav className="me-auto">
                         <Link to='/about' className="nav-link"><i className="bi bi-people-fill"></i> About</Link>
                         <Link to='/contacts' className="nav-link"><i className="bi bi-telephone-fill"></i> Contacts</Link>
-                        <Link to='/employee-management' className="nav-link"><i className="bi bi-person-workspace"></i>Management</Link>
-                        
+                        {localStorage.getItem('authUser') ? 
+                        <Link to='/employee-management' className="nav-link"><i className="bi bi-person-workspace"></i>Management</Link> : ""}  
                     </Nav>
                     {localStorage.getItem('authUser') ? 
                     <Nav>
-                        <NavDropdown title={authUser.firstName} id="collasible-nav-dropdown">
+                        <NavDropdown title={authUser.firstName + " " + authUser.lastName} id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">My profile</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Calendar
                             </NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
+                            <NavDropdown.Item onClick={()=> logout()}>
                                 Log out
                             </NavDropdown.Item>
                         </NavDropdown>
