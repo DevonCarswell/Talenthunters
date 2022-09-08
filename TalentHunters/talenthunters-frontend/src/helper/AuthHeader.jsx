@@ -2,12 +2,12 @@ import React from 'react'
 
 function authHeader() {
     // return authorization header with basic auth credentials
-    let user = JSON.parse(localStorage.getItem('user'));
+    let authUser = JSON.parse(localStorage.getItem('authUser'));
 
-    if (user && user.authdata) {
-        return  `'Authorization': 'Basic ' + ${user.authdata}`;
+    if (authUser && authUser.authdata) {
+        return  `Basic ${authUser.authdata}`;
     } else {
-        return {};
+        return "";
     }
 }
 

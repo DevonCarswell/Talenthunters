@@ -17,14 +17,15 @@ const employeeManagement = () => {
     const passwordRef = useRef(null);
     const newemailRef = useRef(null);
     const header = AuthHeader();
-    console.log(header);
+    const [auth, setAuth] = useState("");
 
 
     const getusers = async () => {
         fetch(`/employee/get-employees`, {
             method: "GET",
             headers: {
-                "Content-type": "application/json;charset=UTF-8", header
+                "Content-type": "application/json;charset=UTF-8", 
+                "Authorization": header
             }
 
         })
@@ -40,7 +41,8 @@ const employeeManagement = () => {
             {
                 method: "GET",
                 headers: {
-                    "Content-type": "application/json;charset=UTF-8", header
+                    "Content-type": "application/json;charset=UTF-8",
+                    "Authorization": header
                 }
 
             })
@@ -57,7 +59,8 @@ const employeeManagement = () => {
             {
                 method: 'DELETE',
                 headers: {
-                    "Content-type": "application/json;charset=UTF-8", header
+                    "Content-type": "application/json;charset=UTF-8",
+                    "Authorization": header
                 }
             }
         );
@@ -70,7 +73,8 @@ const employeeManagement = () => {
         {
             method: "GET",
             headers: {
-                "Content-type": "application/json;charset=UTF-8", header
+                "Content-type": "application/json;charset=UTF-8",
+                "Authorization": header
             }
 
         })
@@ -84,7 +88,7 @@ const employeeManagement = () => {
         const newEmail = newemailRef.current.value;
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json', header},
+            headers: { 'Content-Type': 'application/json', "Authorization": header},
             body: JSON.stringify(newEmail)
         };
         await fetch(`/employee/update-employee-email/${id}`, requestOptions);
@@ -97,7 +101,6 @@ const employeeManagement = () => {
     useEffect(() => {
         getusers();
     }, [])
-
 
 
 

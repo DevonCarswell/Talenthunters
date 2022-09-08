@@ -6,7 +6,7 @@ import authHeader from '../helper/AuthHeader';
 const about = () => {
     const header = authHeader();
     console.log(header);
-    console.log(`'Authorization': 'Basic ' + ${window.btoa('dalma.csernok@talenthunters.com:7KHnP4yZ')}`)
+    console.log(`'Authorization': 'Basic ' + ${window.btoa('dalma.csernok@talenthunters.com:7KHnP4yZ')}`);
     return (
         <>
     <div className="blabla">

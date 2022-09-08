@@ -6,7 +6,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../images/logo.png';
 
+
+
 function CollapsibleExample() {
+
+    let authUser = JSON.parse(localStorage.getItem('authUser'));
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{ backgroundColor: '#07e3be' }}>
             <Container>
@@ -19,8 +23,9 @@ function CollapsibleExample() {
                         <Link to='/employee-management' className="nav-link"><i className="bi bi-person-workspace"></i>Management</Link>
                         
                     </Nav>
+                    {localStorage.getItem('authUser') ? 
                     <Nav>
-                        <NavDropdown title="User" id="collasible-nav-dropdown">
+                        <NavDropdown title={authUser.firstName} id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">My profile</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Calendar
@@ -33,8 +38,8 @@ function CollapsibleExample() {
                         </NavDropdown>
                         <Nav.Link eventKey={2} href="#memes">
                             <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" className="rounded-circle"></img>
-                        </Nav.Link>
-                    </Nav>
+                        </Nav.Link>   
+                    </Nav> : <Nav></Nav>}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
