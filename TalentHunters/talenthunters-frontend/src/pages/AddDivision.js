@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
+import AuthHeader from '../helper/AuthHeader';
 
 
 
@@ -18,7 +19,7 @@ function AddDivision() {
     })
 
     const [employees, setEmployees] = useState(["None"])
-
+    const header = AuthHeader();
     const handleChange = (e) => {
         let value = e.target.value
         let name = e.target.name
@@ -32,7 +33,15 @@ function AddDivision() {
     }
 
     async function getEmployees() {
-        fetch(`/employee/get-roles`)
+        fetch(`/employee/get-roles`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json;charset=UTF-8",
+                        "Authorization": header
+                    }
+
+                })
             .then(response => response.json())
             .then(json => setEmployees(json))
     }
@@ -46,7 +55,10 @@ function AddDivision() {
         }
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": header
+            },
             body: JSON.stringify(newDivision)
         };
         await fetch('/division/add-division', requestOptions);

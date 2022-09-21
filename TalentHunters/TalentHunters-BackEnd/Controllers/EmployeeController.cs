@@ -89,19 +89,19 @@ namespace TalentHunters_BackEnd.Controllers
 
         [AllowAnonymous]
         [HttpGet, HttpPost("login")]
-        public ActionResult<IQueryable> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
+        public async Task<ActionResult<IQueryable>> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
         {
 
-            var employee = _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
+            Employee? employee = await _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password)!;
 
             if (employee is not null)
             {
                 var dataToSend = new
                 {
-                    employee.Result.FirstName,
-                    employee.Result.LastName,
-                    employee.Result.Email,
-                    employee.Result.Role
+                    employee.FirstName,
+                    employee.LastName,
+                    employee.Email,
+                    employee.Role
                 };
 
                 return Ok(dataToSend);

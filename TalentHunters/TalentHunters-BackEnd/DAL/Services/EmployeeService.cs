@@ -67,10 +67,10 @@ namespace TalentHunters_BackEnd.DAL.Services
             return await emails;
         }
 
-        public Task<Employee>? AuthenticateAsync(string email, string password)
+        public async Task<Employee>? AuthenticateAsync(string email, string password)
         {
-            var employee =  _context.Employees.FirstAsync(emp => emp.Email == email);
-            if (SecurePasswordHasher.Verify(password, employee.Result.HashedPassword))
+            var employee = await _context.Employees.FirstAsync(emp => emp.Email == email);
+            if (SecurePasswordHasher.Verify(password, employee.HashedPassword))
             {
                 return employee;
             }
