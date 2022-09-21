@@ -7,6 +7,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TalentHunters-FrontEnd", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TalentHunters-BackEnd", "TalentHunters-BackEnd\TalentHunters-BackEnd.csproj", "{05A06CD8-45D5-4A42-AA20-D32BA0446978}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "talenthunterstests", "talenthunterstests\talenthunterstests.csproj", "{F3A51EA4-F76E-4A74-85C6-E466006DA181}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{05A06CD8-45D5-4A42-AA20-D32BA0446978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05A06CD8-45D5-4A42-AA20-D32BA0446978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05A06CD8-45D5-4A42-AA20-D32BA0446978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A51EA4-F76E-4A74-85C6-E466006DA181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A51EA4-F76E-4A74-85C6-E466006DA181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A51EA4-F76E-4A74-85C6-E466006DA181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A51EA4-F76E-4A74-85C6-E466006DA181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

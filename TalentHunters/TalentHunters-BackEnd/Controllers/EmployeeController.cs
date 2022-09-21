@@ -6,6 +6,7 @@ using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models;
 using TalentHunters_BackEnd.Models.Entities;
 using TalentHunters_BackEnd.Models.Enums;
+using TalentHunters_BackEnd.Models.HelperEntities;
 using TalentHunters_BackEnd.Utilities;
 
 namespace TalentHunters_BackEnd.Controllers
@@ -88,20 +89,20 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet, HttpPost("login")]
-        public async Task<ActionResult<IQueryable>> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
+        [HttpPost("login")]
+        public async Task<ActionResult<LoggedUser>> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
         {
 
-            Employee? employee = await _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password)!;
+            var employee = await _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
 
-            if (employee is not null)
+            if (employee != null)
             {
-                var dataToSend = new
+                var dataToSend = new LoggedUser()
                 {
-                    employee.FirstName,
-                    employee.LastName,
-                    employee.Email,
-                    employee.Role
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Email = employee.Email,
+                    Role = employee.Role
                 };
 
                 return Ok(dataToSend);
