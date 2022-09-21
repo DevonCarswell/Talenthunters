@@ -28,18 +28,6 @@ namespace TalentHunters_BackEnd.Controllers
         [Route("get-employees")]
         public async Task<ActionResult<List<Employee>>> GetAllEmployees()
         {
-            // Return Task<IQueryable>
-            //var employeList = _employeeService.GetAllEmployees();
-            //var employees = employeList.Result.Select(emp => new
-            //{
-            //    emp.Id,
-            //    emp.FirstName,
-            //    emp.LastName,
-            //    emp.Email,
-            //    emp.RegistrationDate,
-            //    emp.EmployeeRole
-
-            //});
             var employees = await _employeeService.GetAllEmployees();
 
             if (employees.Count > 0)
@@ -52,9 +40,15 @@ namespace TalentHunters_BackEnd.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet("get-employee/{id}")]
-        public async Task<Employee> GetEmployeeById(long id)
+        public async Task<ActionResult<Employee>> GetEmployeeById(long id)
         {
-            return await _employeeService.GetEmployeeById(id);
+            var employee = await _employeeService.GetEmployeeById(id);
+            if (employee is not null)
+            {
+                return Ok(employee);
+            }
+
+            return NoContent();
         }
 
         [AllowAnonymous]

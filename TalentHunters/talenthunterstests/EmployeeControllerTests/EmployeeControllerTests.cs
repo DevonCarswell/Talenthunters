@@ -18,6 +18,10 @@ namespace talenthunterstests.EmployeeControllerTest
         private IEmployeeService _mockEmployeeService;
         private EmployeeController _employeeController;
         private Employee _employee;
+        private AuthenticationData _validAuthenticationData;
+        private AuthenticationData _invalidAuthenticationData;
+        private List<Employee> _emptyEmployeesList;
+        private List<Employee> _validEmployeesList;
 
 
         [SetUp]
@@ -34,17 +38,19 @@ namespace talenthunterstests.EmployeeControllerTest
                 HashedPassword = SecurePasswordHasher.Hash("R5DGnJvV"),
                 Role = "Admin"
             };
+            _emptyEmployeesList = new List<Employee>();
+            _validEmployeesList = new List<Employee>() {_employee};
+            _validAuthenticationData = new AuthenticationData() { Email = _employee.Email, Password = "R5DGnJvV" };
+            _invalidAuthenticationData = new AuthenticationData() { Email = _employee.Email, Password = "invalidPassword" };
         }
 
         [Test]
         public void LoginWithValidUserDataReturnsOkObjectResult()
         {
             
-            _mockEmployeeService.AuthenticateAsync(_employee.Email, "R5DGnJvV").Returns(_employee);
-
-            var validAuthenticationData = new AuthenticationData() {Email = _employee.Email, Password = "R5DGnJvV" };
+            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_employee);
             
-            var result = _employeeController.AuthenticateAsync(validAuthenticationData).Result.Result;
+            var result = _employeeController.AuthenticateAsync(_validAuthenticationData).Result.Result;
 
      
             Assert.IsInstanceOf<OkObjectResult>(result);
@@ -53,12 +59,11 @@ namespace talenthunterstests.EmployeeControllerTest
         [Test]
         public void LoginWithInvalidValidUserDataReturnsNoContentResult()
         {
-            
-            _mockEmployeeService.AuthenticateAsync(_employee.Email, "R5DGnJvV").Returns(_employee);
 
-            var authenticationData = new AuthenticationData() { Email = _employee.Email, Password = "invalidPassword" };
+            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_employee);
 
-            var result = _employeeController.AuthenticateAsync(authenticationData).Result.Result;
+
+            var result = _employeeController.AuthenticateAsync(_invalidAuthenticationData).Result.Result;
 
 
             Assert.IsInstanceOf<NoContentResult>(result);
@@ -67,8 +72,7 @@ namespace talenthunterstests.EmployeeControllerTest
         [Test]
         public void GetAllEmployeeListReturnsOkObjectResult()
         {
-            var employees = new List<Employee>() {_employee};
-            _mockEmployeeService.GetAllEmployees().Returns(employees);
+            _mockEmployeeService.GetAllEmployees().Returns(_validEmployeesList);
 
             var result = _employeeController.GetAllEmployees().Result.Result;
 
@@ -78,10 +82,32 @@ namespace talenthunterstests.EmployeeControllerTest
         [Test]
         public void GetAllEmployeeReturnsNoContentResult()
         {
-            var employees = new List<Employee>();
-            _mockEmployeeService.GetAllEmployees().Returns(employees);
+           
+            _mockEmployeeService.GetAllEmployees().Returns(_emptyEmployeesList);
 
             var result = _employeeController.GetAllEmployees().Result.Result;
+
+            Assert.IsInstanceOf<NoContentResult>(result);
+        }
+
+
+        [Test]
+        public void GetEmployeeByIdWithValidIdReturnsOkObjectResult()
+        {
+
+            _mockEmployeeService.GetEmployeeById(_employee.Id).Returns(_employee);
+
+            var result = _employeeController.GetEmployeeById(_employee.Id).Result.Result;
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+        [Test]
+        public void GetEmployeeByIdWithInvalidIdReturnsNoContentResult()
+        {
+            _mockEmployeeService.GetAllEmployees().Returns(new List<Employee>());
+            
+            var result = _employeeController.GetEmployeeById(5).Result.Result;
 
             Assert.IsInstanceOf<NoContentResult>(result);
         }

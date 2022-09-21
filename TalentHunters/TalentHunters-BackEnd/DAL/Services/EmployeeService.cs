@@ -17,10 +17,16 @@ namespace TalentHunters_BackEnd.DAL.Services
         }
         
 
-        public async Task<Employee> GetEmployeeById(long id)
+        public async Task<Employee?> GetEmployeeById(long id)
         {
-            var employee =  _context.Employees.FirstAsync(u => u.Id == id);
-            return await employee;
+            var employees = await GetAllEmployees();
+            var employee = employees.FirstOrDefault(u => u.Id == id);
+            if (employee is not null)
+            {
+                return employee;
+            }
+
+            return null;
         }
 
         public async Task<List<Employee>> GetAllEmployees()
