@@ -37,7 +37,7 @@ namespace talenthunterstests.EmployeeControllerTest
         }
 
         [Test]
-        public async Task LoginWithValidUserData()
+        public void LoginWithValidUserDataReturnsOkObjectResult()
         {
             
             _mockEmployeeService.AuthenticateAsync(_employee.Email, "R5DGnJvV").Returns(_employee);
@@ -51,7 +51,7 @@ namespace talenthunterstests.EmployeeControllerTest
         }
 
         [Test]
-        public async Task LoginWithInvalidValidUserData()
+        public void LoginWithInvalidValidUserDataReturnsNoContentResult()
         {
             
             _mockEmployeeService.AuthenticateAsync(_employee.Email, "R5DGnJvV").Returns(_employee);
@@ -64,6 +64,26 @@ namespace talenthunterstests.EmployeeControllerTest
             Assert.IsInstanceOf<NoContentResult>(result);
         }
 
+        [Test]
+        public void GetAllEmployeeListReturnsOkObjectResult()
+        {
+            var employees = new List<Employee>() {_employee};
+            _mockEmployeeService.GetAllEmployees().Returns(employees);
 
+            var result = _employeeController.GetAllEmployees().Result.Result;
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+        [Test]
+        public void GetAllEmployeeReturnsNoContentResult()
+        {
+            var employees = new List<Employee>();
+            _mockEmployeeService.GetAllEmployees().Returns(employees);
+
+            var result = _employeeController.GetAllEmployees().Result.Result;
+
+            Assert.IsInstanceOf<NoContentResult>(result);
+        }
     }
 }
