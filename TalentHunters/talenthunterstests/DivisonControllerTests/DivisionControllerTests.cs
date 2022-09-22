@@ -128,5 +128,26 @@ namespace talenthunterstests.DivisonControllerTests
 
             Assert.IsInstanceOf<NoContentResult>(result);
         }
+
+
+        [Test]
+        public void DeleteExistDivisionReturnsOkResult()
+        {
+            _mocDivisionService.GetDivisionById(_testDivision.Id).Returns(_testDivision);
+
+            var result = _divisionController.DeleteDivision(_testDivision.Id).Result;
+
+            Assert.IsInstanceOf<OkResult>(result);
+        }
+
+        [Test]
+        public void DeleteNonExistDivisionReturnsOkResult()
+        {
+            _mocDivisionService.GetDivisionById(1).ReturnsNull();
+
+            var result = _divisionController.DeleteDivision(1).Result;
+
+            Assert.IsInstanceOf<NoContentResult>(result);
+        }
     }
 }

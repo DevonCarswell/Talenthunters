@@ -65,8 +65,12 @@ namespace TalentHunters_BackEnd.DAL.Services
         public async Task DeleteEmployee(long id)
         {
             var employeeToDelete = await GetEmployeeById(id);
-            _context.Employees.Remove(employeeToDelete);
-            await _context.SaveChangesAsync();
+            if (employeeToDelete is not null)
+            {
+                _context.Employees.Remove(employeeToDelete);
+                await _context.SaveChangesAsync();
+            }
+            
         }
 
         public async Task<List<Employee>> GetEmployeesWithoutDivision()

@@ -72,9 +72,17 @@ namespace TalentHunters_BackEnd.Controllers
         
 
         [HttpDelete("delete-division/{id}")]
-        public async Task DeleteDivision(long id)
+        public async Task<ActionResult> DeleteDivision(long id)
         {
-           await _divisionService.DeleteDivision(id);
+            var division = await _divisionService.GetDivisionById(id);
+            if (division is not null)
+            {
+                await _divisionService.DeleteDivision(id);
+                return Ok();
+            }
+
+            return NoContent();
+
         }
     };
 
