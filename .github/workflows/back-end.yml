@@ -1,0 +1,32 @@
+name: .NET_TESTS
+
+on:
+  push:
+    branches: [ "feature/test" ]
+  pull_request:
+    branches: [ "feature/test" ]
+  workflow_dispatch:
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      Solution_Name: TalentHunters.sln
+      Test_Project_Path: .\TalentHunters\talenthunterstests\talenthunterstests.csproj
+    if: "contains(github.event.commits[0].message, '[run test]')"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core SDK 17.1.x
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+    - name: Restore dependencies
+      working-directory: "./TalentHunters/TalentHunters-BackEnd"
+      run: dotnet restore
+    - name: Build
+      working-directory: "./TalentHunters/TalentHunters-BackEnd"
+      run: dotnet build
+    - name: Test
+      working-directory: "./TalentHunters/talenthunterstests"
+      run: dotnet test
