@@ -83,9 +83,17 @@ namespace TalentHunters_BackEnd.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("delete-employee/{id}")]
-        public async Task DeleteEmployee(long id)
+        public async Task<ActionResult> DeleteEmployee(long id)
         {
-            await _employeeService.DeleteEmployee(id);
+            var employee = await _employeeService.GetEmployeeById(id);
+            if (employee is not null)
+            {
+                await _employeeService.DeleteEmployee(id);
+                return Ok();
+            }
+
+            return NoContent();
+
         }
 
         [Authorize(Roles = "Admin")]

@@ -160,7 +160,7 @@ namespace talenthunterstests.EmployeeControllerTest
 
 
         [Test]
-        public void UpdateEmailAddressNOnExistingUserReturnsBadRequestResult()
+        public void UpdateEmailAddressNOnExistingUserReturnsNotFoundResult()
         {
             _mockEmployeeService.GetEmployeeById(1).ReturnsNull();
 
@@ -168,6 +168,31 @@ namespace talenthunterstests.EmployeeControllerTest
 
 
             Assert.IsInstanceOf<NotFoundResult>(result);
+        }
+
+
+
+        [Test]
+        public void DeleteExistEmployeeReturnsOkResult()
+        {
+            _mockEmployeeService.GetEmployeeById(1).Returns(_existEmployee);
+
+            var result = _employeeController.DeleteEmployee(1).Result;
+
+
+            Assert.IsInstanceOf<OkResult>(result);
+        }
+
+
+        [Test]
+        public void DeleteNonExistEmployeeReturnsNoContentResult()
+        {
+            _mockEmployeeService.GetEmployeeById(1).ReturnsNull();
+
+            var result = _employeeController.DeleteEmployee(1).Result;
+
+
+            Assert.IsInstanceOf<NoContentResult>(result);
         }
     }
 }
