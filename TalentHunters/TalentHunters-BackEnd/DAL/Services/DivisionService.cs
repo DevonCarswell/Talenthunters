@@ -43,10 +43,10 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task<List<Employee>> GetEmployeesByDivision(long id)
         {
-            var employees = _context.Divisions
+            var employees = await _context.Divisions
                 .Where(div => div.Id == id)
                 .SelectMany(div => div.Employees).ToListAsync();
-            return await employees;
+            return employees;
         }
 
         public async Task DeleteDivision(long id)

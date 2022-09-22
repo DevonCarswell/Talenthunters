@@ -59,9 +59,15 @@ namespace TalentHunters_BackEnd.Controllers
 
         [HttpGet]
         [Route("get-employees-by-division/{id}")]
-        public async Task<List<Employee>> GetEmployeesByDivision(long id)
+        public async Task<ActionResult<List<Employee>>> GetEmployeesByDivision(long id)
         {
-            return await _divisionService.GetEmployeesByDivision(id);
+            var employees = await _divisionService.GetEmployeesByDivision(id);
+            if (employees.Count > 0)
+            {
+                return Ok(employees);
+            }
+
+            return NoContent();
         }
         
 
