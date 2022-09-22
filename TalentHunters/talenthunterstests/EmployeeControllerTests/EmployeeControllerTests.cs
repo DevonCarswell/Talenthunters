@@ -20,7 +20,6 @@ namespace talenthunterstests.EmployeeControllerTest
         private IEmployeeService _mockEmployeeService;
         private EmployeeController _employeeController;
         private Employee _existEmployee;
-
         private AuthenticationData _validAuthenticationData;
         private AuthenticationData _invalidAuthenticationData;
         private List<Employee> _emptyEmployeesList;
@@ -191,6 +190,30 @@ namespace talenthunterstests.EmployeeControllerTest
 
             var result = _employeeController.DeleteEmployee(1).Result;
 
+
+            Assert.IsInstanceOf<NoContentResult>(result);
+        }
+
+
+        [Test]
+        public void GetAllEmailsWithContentReturnsOkObjectResult()
+        {
+            var validEmails = new List<string>() {_existEmployee.Email};
+            _mockEmployeeService.GetAllEmails().Returns(validEmails);
+
+            var result = _employeeController.GetAllEmails().Result.Result;
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+
+        [Test]
+        public void GetAllEmailsWithoutContentReturnsNoContentResult()
+        {
+            var invalidEmails = new List<string>();
+            _mockEmployeeService.GetAllEmails().Returns(invalidEmails);
+
+            var result = _employeeController.GetAllEmails().Result.Result;
 
             Assert.IsInstanceOf<NoContentResult>(result);
         }

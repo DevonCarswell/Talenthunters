@@ -106,9 +106,15 @@ namespace TalentHunters_BackEnd.Controllers
 
         [AllowAnonymous]
         [HttpGet("get-emails")]
-        public Task<List<string>> GetAllEmails()
+        public async Task<ActionResult<List<string>>> GetAllEmails()
         {
-            return  _employeeService.GetAllEmails();
+            var emails = await _employeeService.GetAllEmails();
+            if (emails.Count > 0)
+            {
+                return Ok(emails);
+            }
+
+            return NoContent();
         }
 
         [AllowAnonymous]
