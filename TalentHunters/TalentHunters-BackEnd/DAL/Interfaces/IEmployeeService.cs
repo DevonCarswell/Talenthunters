@@ -19,5 +19,7 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
         Task<List<string>> GetAllEmails();
 
         Task<Employee>? AuthenticateAsync(string email, string password);
+
+        Task<bool> CheckEmailExistInDatabase(string email);
     }
 }

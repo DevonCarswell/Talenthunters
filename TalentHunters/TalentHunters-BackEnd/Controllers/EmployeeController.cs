@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TalentHunters_BackEnd.Auth;
@@ -53,9 +54,18 @@ namespace TalentHunters_BackEnd.Controllers
 
         [AllowAnonymous]
         [HttpPost("add-employee")]
-        public async Task AddEmployee([FromBody] Employee emp)
+        public async Task<ActionResult> AddEmployee([FromBody] Employee emp)
         {
+            var isValidEmail = await _employeeService.CheckEmailExistInDatabase(emp.Email);
+            if (isValidEmail)
+            {
+                //return Content(
+                //    "<script> alert('Email address is taken') </script>",
+                //);
+                return BadRequest();
+            }
             await _employeeService.AddEmployee(emp);
+            return Ok(emp);
         }
 
         [Authorize(Roles = "Admin")]

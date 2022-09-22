@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -14,12 +14,13 @@ function ReactComponent() {
         role: "None",
         confirmedpassword: ""
     })
-  
-    const [emails, setEmails] = useState([])
+    const [authUser, SetAuthUser] = useState({})
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
-        let value = e.target.value
-        let name = e.target.name
+        let value = e.target.value;
+        let name = e.target.name;
 
         setUser((user) => {
             return {
@@ -27,29 +28,42 @@ function ReactComponent() {
                 [name]: value
             }
         })
-    }
+    };
     
     async function adduser() {
-        if (user.email != '' && user.firstname != '' && user.lastname != '' && user.password != ''){
+        if (user.email != '' && user.firstname != '' && user.lastname != '' && user.password != '') {
             const newUser = {
-                'Email': user.email, 'HashedPassword': user.password,
-                'FirstName': user.firstname, 'LastName': user.lastname, 'EmployeeRole': user.role
+                'Email': user.email,
+                'HashedPassword': user.password,
+                'FirstName': user.firstname,
+                'LastName': user.lastname,
+                'EmployeeRole': user.role
             };
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newUser)
             };
-            await fetch('/employee/add-employee', requestOptions);
+            await fetch('/employee/add-employee', requestOptions)
+                .then((response) => {
+                  if (response.status === 400) {
+                      alert('Email address is taken')
+                    }
+                    if (response.status === 200) {
+                        authUser.authdata = window.btoa(user.email + ':' + user.password);
+                        authUser.firstName = user.firstname;
+                        authUser.lastName = user.lastname;
+                        authUser.email = user.email;
+                        authUser.role = user.role;
+                            localStorage.setItem('authUser', JSON.stringify(authUser));
+                      navigate('/')
+                  }
+                }
+        );
         }
     }
 
-    useEffect(()=> {
-            fetch(`/employee/get-emails`)
-                .then(response => response.json())
-                .then(json => setEmails(json))
-    }, [])
-
+  
 
 
     return (
@@ -57,7 +71,7 @@ function ReactComponent() {
     
 
             <div>
-                {/* <form> */}
+                
                     <h2>Registration</h2>
                     <label>First Name</label>  <br />
                     <input placeholder="Firstname"
@@ -77,9 +91,9 @@ function ReactComponent() {
                         id="confirmeduserPassword" name="confirmedpassword" type="password" value={user.confirmedpassword} onChange={handleChange} required />  <br /><br />
                     {user.password != user.confirmedpassword ? <p style={{color:"red"}}>Passwords do not match!</p> : ""}
                     
-                    <Link to="/"><Button disabled={user.password != user.confirmedpassword || user.password == "" || emails.includes(user.email)} onClick={() => adduser()} text="Register" /></Link>< br /> < br />
+                    <Button disabled={user.password != user.confirmedpassword || user.password == "" || emails.includes(user.email)} onClick={() => adduser()} text="Register" /> < br /> < br />
 
-                {/* </form> */}
+               
 
             </div>
         </>

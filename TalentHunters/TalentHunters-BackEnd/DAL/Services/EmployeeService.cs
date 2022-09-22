@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models.Entities;
 using TalentHunters_BackEnd.Models.Enums;
@@ -37,6 +38,8 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task AddEmployee(Employee employee)
         {
+            var employees = await GetAllEmployees();
+            
             employee.HashedPassword = SecurePasswordHasher.Hash(employee.HashedPassword);
             // if (employee.EmployeeRole == null)
             // {
@@ -85,6 +88,17 @@ namespace TalentHunters_BackEnd.DAL.Services
             }
 
             return null;
+        }
+
+        public async Task<bool> CheckEmailExistInDatabase(string email)
+        {
+            var employees = await GetAllEmployees();
+            if (employees.Any(emp => emp.Email == email))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
