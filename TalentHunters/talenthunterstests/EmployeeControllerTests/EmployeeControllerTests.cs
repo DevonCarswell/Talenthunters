@@ -17,7 +17,8 @@ namespace talenthunterstests.EmployeeControllerTest
     {
         private IEmployeeService _mockEmployeeService;
         private EmployeeController _employeeController;
-        private Employee _employee;
+        private Employee _existEmployee;
+
         private AuthenticationData _validAuthenticationData;
         private AuthenticationData _invalidAuthenticationData;
         private List<Employee> _emptyEmployeesList;
@@ -29,7 +30,7 @@ namespace talenthunterstests.EmployeeControllerTest
         {
             _mockEmployeeService = Substitute.For<IEmployeeService>();
             _employeeController = new EmployeeController(_mockEmployeeService);
-            _employee = new Employee()
+            _existEmployee = new Employee()
             {
                 Email = "zsolt.kasza@talenthunters.com",
                 FirstName = "Zsolt",
@@ -39,16 +40,16 @@ namespace talenthunterstests.EmployeeControllerTest
                 Role = "Admin"
             };
             _emptyEmployeesList = new List<Employee>();
-            _validEmployeesList = new List<Employee>() {_employee};
-            _validAuthenticationData = new AuthenticationData() { Email = _employee.Email, Password = "R5DGnJvV" };
-            _invalidAuthenticationData = new AuthenticationData() { Email = _employee.Email, Password = "invalidPassword" };
+            _validEmployeesList = new List<Employee>() {_existEmployee};
+            _validAuthenticationData = new AuthenticationData() { Email = _existEmployee.Email, Password = "R5DGnJvV" };
+            _invalidAuthenticationData = new AuthenticationData() { Email = _existEmployee.Email, Password = "invalidPassword" };
         }
 
         [Test]
         public void LoginWithValidUserDataReturnsOkObjectResult()
         {
             
-            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_employee);
+            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_existEmployee);
             
             var result = _employeeController.AuthenticateAsync(_validAuthenticationData).Result.Result;
 
@@ -60,7 +61,7 @@ namespace talenthunterstests.EmployeeControllerTest
         public void LoginWithInvalidValidUserDataReturnsNoContentResult()
         {
 
-            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_employee);
+            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_existEmployee);
 
 
             var result = _employeeController.AuthenticateAsync(_invalidAuthenticationData).Result.Result;
@@ -95,9 +96,9 @@ namespace talenthunterstests.EmployeeControllerTest
         public void GetEmployeeByIdWithValidIdReturnsOkObjectResult()
         {
 
-            _mockEmployeeService.GetEmployeeById(_employee.Id).Returns(_employee);
+            _mockEmployeeService.GetEmployeeById(_existEmployee.Id).Returns(_existEmployee);
 
-            var result = _employeeController.GetEmployeeById(_employee.Id).Result.Result;
+            var result = _employeeController.GetEmployeeById(_existEmployee.Id).Result.Result;
 
             Assert.IsInstanceOf<OkObjectResult>(result);
         }
@@ -110,6 +111,37 @@ namespace talenthunterstests.EmployeeControllerTest
             var result = _employeeController.GetEmployeeById(5).Result.Result;
 
             Assert.IsInstanceOf<NoContentResult>(result);
+        }
+
+
+        [Test]
+        public void RegisterUserWhichDoesntExistReturnsOkObjectResult()
+        {
+            var newEmployee = new Employee()
+            {
+                Email = "dalma.csernok@talenthunters.com",
+                FirstName = "Dalma",
+                LastName = "Csernok",
+                EmployeeRole = EmployeeRole.FrontEndDeveloper,
+                HashedPassword = SecurePasswordHasher.Hash("7KHnP4yZ"),
+                Role = "Admin"
+            };
+
+            _mockEmployeeService.CheckEmailExistInDatabase(newEmployee.Email).Returns(false);
+
+            var result = _employeeController.AddEmployee(newEmployee).Result;
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+        [Test]
+        public void RegisterUserWhichExistReturnsBadRequestObjectResult()
+        {
+            _mockEmployeeService.CheckEmailExistInDatabase(_existEmployee.Email).Returns(true);
+
+            var result = _employeeController.AddEmployee(_existEmployee).Result;
+
+            Assert.IsInstanceOf<BadRequestResult>(result);
         }
     }
 }

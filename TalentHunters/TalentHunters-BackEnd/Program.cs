@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +11,9 @@ namespace TalentHunters_BackEnd
 {
     public class Program
     {
+
+        //[DllImport("TalentHunters-BackEnd.dll")]
+        //public static extern void Main2();
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -39,7 +43,7 @@ namespace TalentHunters_BackEnd
         //        var services = scope.ServiceProvider;
         //        try
         //        {
-        //            var context = services.GetRequiredService<TalentHuntersContext>();
+        //       }     var context = services.GetRequiredService<TalentHuntersContext>();
         //            DbInitializer.Initialize(context);
         //        }
         //        catch (Exception ex)
@@ -52,9 +56,6 @@ namespace TalentHunters_BackEnd
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

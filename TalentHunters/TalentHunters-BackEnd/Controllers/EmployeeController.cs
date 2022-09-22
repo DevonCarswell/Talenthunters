@@ -59,9 +59,6 @@ namespace TalentHunters_BackEnd.Controllers
             var isValidEmail = await _employeeService.CheckEmailExistInDatabase(emp.Email);
             if (isValidEmail)
             {
-                //return Content(
-                //    "<script> alert('Email address is taken') </script>",
-                //);
                 return BadRequest();
             }
             await _employeeService.AddEmployee(emp);

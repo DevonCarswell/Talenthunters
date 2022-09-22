@@ -82,7 +82,7 @@ function ReactComponent() {
                     <label>Email</label>  <br />
                     <input placeholder="Email"
                         id="userEmail" name="email" value={user.email} onChange={handleChange} required /> <br /><br />
-                    {emails.includes(user.email) ? <p style={{color:"red"}}>This email is already in use!</p> : ""}
+                    {/*{emails.includes(user.email) ? <p style={{color:"red"}}>This email is already in use!</p> : ""}*/}
                     <label>Password</label> <br />
                     <input placeholder="Password"
                         id="userPassword" name="password" type="password" value={user.password} onChange={handleChange} required />  <br /><br />
@@ -91,7 +91,7 @@ function ReactComponent() {
                         id="confirmeduserPassword" name="confirmedpassword" type="password" value={user.confirmedpassword} onChange={handleChange} required />  <br /><br />
                     {user.password != user.confirmedpassword ? <p style={{color:"red"}}>Passwords do not match!</p> : ""}
                     
-                    <Button disabled={user.password != user.confirmedpassword || user.password == "" || emails.includes(user.email)} onClick={() => adduser()} text="Register" /> < br /> < br />
+                    <Button disabled={user.password != user.confirmedpassword || user.password == "" } onClick={() => adduser()} text="Register" /> < br /> < br />
 
                
 
