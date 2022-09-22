@@ -17,7 +17,8 @@ namespace talenthunterstests.DivisonControllerTests
     {
         private IDivisionService _mocDivisionService;
         private DivisionController _divisionController;
-       
+        private Division _testDivision; 
+
 
 
         [SetUp]
@@ -25,18 +26,49 @@ namespace talenthunterstests.DivisonControllerTests
         {
             _mocDivisionService = Substitute.For<IDivisionService>();
             _divisionController = new DivisionController(_mocDivisionService);
+            _testDivision  = new Division() { Employees = new(), Name = "Test" };
         }
 
         [Test]
         public void AddNotExistDivisonReturnsOkObjectResult()
         {
-            var newDivison = new Division() {Employees = new(), Name = "BrandNewDivison"};
+            _mocDivisionService.CheckDivisionIsExist(_testDivision.Name).Returns(false);
 
-            _mocDivisionService.CheckDivisionIsExist(newDivison.Name).Returns(false);
-
-            var result = _divisionController.AddDivision(newDivison).Result;
+            var result = _divisionController.AddDivision(_testDivision).Result;
             
             Assert.IsInstanceOf<OkResult>(result);
+        }
+
+        [Test]
+        public void AddExistDivisonReturnsBadRequestResult()
+        {
+            _mocDivisionService.CheckDivisionIsExist(_testDivision.Name).Returns(true);
+
+            var result = _divisionController.AddDivision(_testDivision).Result;
+
+            Assert.IsInstanceOf<BadRequestResult>(result);
+        }
+
+        [Test]
+        public void GetDivisionByIdWithValidIdReturnsOkObjectResult()
+        {
+
+            _mocDivisionService.GetDivisionById(_testDivision.Id).Returns(_testDivision);
+
+            var result = _divisionController.GetDivisionById(_testDivision.Id).Result.Result;
+            
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+        [Test]
+        public void GetDivisionByIdWithInValidIdReturnsNoContentResult()
+        {
+
+            _mocDivisionService.GetDivisionById(_testDivision.Id).ReturnsNull();
+
+            var result = _divisionController.GetDivisionById(_testDivision.Id).Result.Result;
+
+            Assert.IsInstanceOf<NotFoundResult>(result);
         }
     }
 }

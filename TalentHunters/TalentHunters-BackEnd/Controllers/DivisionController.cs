@@ -33,9 +33,15 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [HttpGet("get-division/{id}")]
-        public async Task<Division> GetDivisionById(long id)
+        public async Task<ActionResult<Division>> GetDivisionById(long id)
         {
-            return await _divisionService.GetDivisionById(id);
+            var division = await _divisionService.GetDivisionById(id);
+            if (division is not null)
+            {
+                return Ok(division);
+            }
+
+            return NotFound();
         }
 
         [HttpGet]

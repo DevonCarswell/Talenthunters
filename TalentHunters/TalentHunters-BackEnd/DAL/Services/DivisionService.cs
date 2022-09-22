@@ -23,10 +23,16 @@ namespace TalentHunters_BackEnd.DAL.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Division> GetDivisionById(long id)
+        public async Task<Division?> GetDivisionById(long id)
         {
-            var division = _context.Divisions.FirstAsync(div => div.Id == id);
-            return await division;
+            var divisions = await GetAllDivisions();
+            var division = divisions.FirstOrDefault(div => div.Id == id);
+            if (division is not null)
+            {
+                return division;
+            }
+
+            return null;
         }
 
         public async Task<List<Division>> GetAllDivisions()
