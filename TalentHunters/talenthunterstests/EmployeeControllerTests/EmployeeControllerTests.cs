@@ -8,6 +8,8 @@ using TalentHunters_BackEnd.Utilities;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NSubstitute.ExceptionExtensions;
+using NSubstitute.ReturnsExtensions;
 using TalentHunters_BackEnd.Models.HelperEntities;
 
 namespace talenthunterstests.EmployeeControllerTest
@@ -135,13 +137,37 @@ namespace talenthunterstests.EmployeeControllerTest
         }
 
         [Test]
-        public void RegisterUserWhichExistReturnsBadRequestObjectResult()
+        public void RegisterUserWhichExistReturnsBadRequestResult()
         {
             _mockEmployeeService.CheckEmailExistInDatabase(_existEmployee.Email).Returns(true);
 
             var result = _employeeController.AddEmployee(_existEmployee).Result;
 
             Assert.IsInstanceOf<BadRequestResult>(result);
+        }
+
+
+        [Test]
+        public void UpdateEmailAddressOnExistingUserReturnsOkResult()
+        {
+            _mockEmployeeService.GetEmployeeById(1).Returns(_existEmployee);
+
+            var result = _employeeController.UpdateEmployeeEmailById(1, "alma@alma.com").Result;
+            
+
+            Assert.IsInstanceOf<OkResult>(result);
+        }
+
+
+        [Test]
+        public void UpdateEmailAddressNOnExistingUserReturnsBadRequestResult()
+        {
+            _mockEmployeeService.GetEmployeeById(1).ReturnsNull();
+
+            var result = _employeeController.UpdateEmployeeEmailById(1, "alma@alma.com").Result;
+
+
+            Assert.IsInstanceOf<NotFoundResult>(result);
         }
     }
 }

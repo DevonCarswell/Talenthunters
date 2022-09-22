@@ -50,11 +50,15 @@ namespace TalentHunters_BackEnd.DAL.Services
             await _context.SaveChangesAsync();
         }
 
-        public void UpdateEmployeeEmail(long id, string email)
+        public async Task UpdateEmployeeEmail(long id, string email)
         {
-            var employeeToUpdate = GetEmployeeById(id).Result;
-            employeeToUpdate.Email = email;
-            _context.SaveChanges();
+            var employeeToUpdate = await GetEmployeeById(id);
+            if (employeeToUpdate is not null)
+            {
+                employeeToUpdate.Email = email;
+                await _context.SaveChangesAsync();
+            }
+            
 
         }
 

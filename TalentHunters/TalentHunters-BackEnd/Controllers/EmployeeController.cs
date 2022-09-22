@@ -67,10 +67,17 @@ namespace TalentHunters_BackEnd.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("update-employee-email/{id}")]
-        public void UpdateEmployeeEmailById(long id, [FromBody] string email)
+        public async Task<ActionResult> UpdateEmployeeEmailById(long id, [FromBody] string email)
         {
+            var employee = await _employeeService.GetEmployeeById(id);
+            if (employee is not null)
+            {
+                await _employeeService.UpdateEmployeeEmail(id, email);
+                return Ok();
+            }
 
-            _employeeService.UpdateEmployeeEmail(id, email);
+            return NotFound();
+
 
         }
 
