@@ -86,7 +86,7 @@ namespace TalentHunters_BackEnd.Controllers
         [HttpGet("get-emails")]
         public Task<List<string>> GetAllEmails()
         {
-            return _employeeService.GetAllEmails();
+            return  _employeeService.GetAllEmails();
         }
 
         [AllowAnonymous]
