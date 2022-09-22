@@ -49,6 +49,17 @@ namespace TalentHunters_BackEnd.DAL.Services
             _context.Divisions.Remove(divisionToDelete);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> CheckDivisionIsExist(string name)
+        {
+            var divisions = await GetAllDivisions();
+            if (divisions.Any(div => div.Name == name))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
     

@@ -116,7 +116,7 @@ namespace talenthunterstests.EmployeeControllerTest
 
 
         [Test]
-        public void RegisterUserWhichDoesntExistReturnsOkObjectResult()
+        public void RegisterUserWhichDoesnotExistReturnsOkObjectResult()
         {
             var newEmployee = new Employee()
             {

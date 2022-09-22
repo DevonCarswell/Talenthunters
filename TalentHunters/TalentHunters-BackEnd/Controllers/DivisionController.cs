@@ -21,9 +21,15 @@ namespace TalentHunters_BackEnd.Controllers
         }
 
         [HttpPost("add-division")]
-        public async Task AddDivision([FromBody] Division division)
+        public async Task<ActionResult> AddDivision([FromBody] Division division)
         {
+            var isDivisionExist = await _divisionService.CheckDivisionIsExist(division.Name);
+            if (isDivisionExist)
+            {
+                return BadRequest();
+            }
             await _divisionService.AddDivision(division);
+            return Ok();
         }
 
         [HttpGet("get-division/{id}")]

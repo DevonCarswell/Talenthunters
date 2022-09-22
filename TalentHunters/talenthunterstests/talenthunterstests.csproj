@@ -21,8 +21,4 @@
     <ProjectReference Include="..\TalentHunters-BackEnd\TalentHunters-BackEnd.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DivisonControllerTests\" />
-  </ItemGroup>
-
 </Project>

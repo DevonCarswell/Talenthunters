@@ -11,4 +11,6 @@ public interface IDivisionService
     Task<List<Employee>> GetEmployeesByDivision(long id);
 
     Task DeleteDivision(long id);
+
+    Task<bool> CheckDivisionIsExist(string name);
 }
