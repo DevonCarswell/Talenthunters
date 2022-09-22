@@ -37,8 +37,8 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task<List<Division>> GetAllDivisions()
         {
-            var divisions = _context.Divisions.ToListAsync();
-            return await divisions;
+            var divisions = await _context.Divisions.ToListAsync();
+            return divisions;
         }
 
         public async Task<List<Employee>> GetEmployeesByDivision(long id)

@@ -18,6 +18,7 @@ namespace talenthunterstests.DivisonControllerTests
         private IDivisionService _mocDivisionService;
         private DivisionController _divisionController;
         private Division _testDivision; 
+        private List<Division> _testDivisionList; 
 
 
 
@@ -27,6 +28,7 @@ namespace talenthunterstests.DivisonControllerTests
             _mocDivisionService = Substitute.For<IDivisionService>();
             _divisionController = new DivisionController(_mocDivisionService);
             _testDivision  = new Division() { Employees = new(), Name = "Test" };
+            _testDivisionList = new List<Division>() {_testDivision};
         }
 
         [Test]
@@ -69,6 +71,30 @@ namespace talenthunterstests.DivisonControllerTests
             var result = _divisionController.GetDivisionById(_testDivision.Id).Result.Result;
 
             Assert.IsInstanceOf<NotFoundResult>(result);
+        }
+
+
+        [Test]
+        public void GetAllDivisionsReturnsOkObjectResult()
+        {
+            _mocDivisionService.GetAllDivisions().Returns(_testDivisionList);
+
+            var result = _divisionController.GetAllDivisions().Result.Result;
+            
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+
+        [Test]
+        public void GetAllDivisionsReturnsNoContentResult()
+        {
+            _mocDivisionService.GetAllDivisions().Returns(new List<Division>());
+
+            var result = _divisionController.GetAllDivisions().Result.Result;
+
+
+            Assert.IsInstanceOf<NoContentResult>(result);
         }
     }
 }

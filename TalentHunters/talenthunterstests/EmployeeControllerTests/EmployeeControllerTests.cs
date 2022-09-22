@@ -49,9 +49,9 @@ namespace talenthunterstests.EmployeeControllerTest
         [Test]
         public void LoginWithValidUserDataReturnsOkObjectResult()
         {
-            
+
             _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_existEmployee);
-            
+
             var result = _employeeController.AuthenticateAsync(_validAuthenticationData).Result.Result;
 
      
@@ -61,9 +61,6 @@ namespace talenthunterstests.EmployeeControllerTest
         [Test]
         public void LoginWithInvalidValidUserDataReturnsNoContentResult()
         {
-
-            _mockEmployeeService.AuthenticateAsync(_validAuthenticationData.Email, _validAuthenticationData.Password).Returns(_existEmployee);
-
 
             var result = _employeeController.AuthenticateAsync(_invalidAuthenticationData).Result.Result;
 

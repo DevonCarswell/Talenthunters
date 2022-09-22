@@ -46,9 +46,15 @@ namespace TalentHunters_BackEnd.Controllers
 
         [HttpGet]
         [Route("get-divisions")]
-        public async Task<List<Division>> GetAllDivisions()
+        public async Task<ActionResult<List<Division>>> GetAllDivisions()
         {
-            return await _divisionService.GetAllDivisions();
+            var divisions = await _divisionService.GetAllDivisions();
+            if (divisions.Count > 0)
+            {
+                return Ok(divisions);
+            }
+
+            return NoContent();
         }
 
         [HttpGet]
