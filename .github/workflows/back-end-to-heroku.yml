@@ -6,14 +6,38 @@ on:
   pull_request:
     branches: [ "deployment/docker" ]
   workflow_dispatch:
-  
+
+
+
 jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      Solution_Name: TalentHunters.sln
+      Test_Project_Path: .\TalentHunters\talenthunterstests\talenthunterstests.csproj
+    if: "contains(github.event.commits[0].message, '[deploy]')"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core SDK 17.1.x
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+    - name: Restore dependencies
+      working-directory: "./TalentHunters/TalentHunters-BackEnd"
+      run: dotnet restore
+    - name: Build
+      working-directory: "./TalentHunters/TalentHunters-BackEnd"
+      run: dotnet build
+    - name: Test
+      working-directory: "./TalentHunters/talenthunterstests"
+      run: dotnet test
+
   Th_to_DockerHub:
         name: Talenthunters to DockerHub
+        needs: [build]
         # The type of runner that the job will run on
         runs-on: ubuntu-latest
-
-        if: "contains(github.event.commits[0].message, '[deploy]')"
 
         steps:
           - name: checkout repo
@@ -45,5 +69,38 @@ jobs:
               image: devoncarswell/talenthunters:latest
               run: |
                 echo "runing the docker image"
-                
- 
+  deploy_to_Heroku:
+     name: Deploy to Heroku
+     runs-on: ubuntu-latest
+     # only run this after deploying to docker
+     needs: [push_to_DockerHub]
+     steps:
+       - name: checkout repo
+         uses: actions/checkout@v2
+       # more info on deploy to Heroku:
+       # https://github.com/marketplace/actions/deploy-to-heroku
+       - name: deploy to Heroku
+         uses: akhileshns/heroku-deploy@v3.12.12
+         with:
+           heroku_api_key: bb77b51e-7a8d-42b1-b9a9-7d90be56e467
+           heroku_app_name: talenthunterserp
+           heroku_email: kaszazsolt90@gmail.com@gmail.com
+           # build the app docker image using the Dockerfile
+           # and run that image in a container that's pushed to Heroku
+           usedocker: true
+           justlogin: true
+
+       - name: "Login to heroku registry"
+         run: heroku container:login
+
+       - name: "Pull docker container" 
+         run: docker pull devoncarswell/talenthunters:latest
+
+       - name: "push to heroku registry"
+         run: docker tag devoncarswell/talenthunters:latest registry.heroku.com/talenthunterserp/web
+
+       - name: "Push the container"
+         run: docker push registry.heroku.com/talenthunterserp/web
+
+       - name: "Releases the container"
+         run: heroku container:release web -a talenthunterserp
