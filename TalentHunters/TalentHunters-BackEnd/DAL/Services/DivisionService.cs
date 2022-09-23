@@ -62,7 +62,7 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task<bool> CheckDivisionIsExist(string name)
         {
-            var divisions = await GetAllDivisions();
+            var divisions = await GetAllDivisions(); 
             if (divisions.Any(div => div.Name == name))
             {
                 return true;
