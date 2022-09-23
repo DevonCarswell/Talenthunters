@@ -7,7 +7,7 @@ COPY ./TalentHunters/TalentHunters-BackEnd/TalentHunters-BackEnd.csproj ./
 RUN dotnet restore
     
 # Copy everything else and build
-COPY . ./
+COPY ./TalentHunters/TalentHunters-BackEnd ./
 RUN dotnet publish -c Release -o out
     
 
