@@ -23,6 +23,7 @@ namespace TalentHunters_BackEnd.DAL.Services
             await _context.SaveChangesAsync();
         }
 
+
         public async Task<Division?> GetDivisionById(long id)
         {
             var divisions = await GetAllDivisions();
