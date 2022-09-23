@@ -35,7 +35,7 @@ jobs:
             uses: docker/build-push-action@v2
             with:
               context: ./
-              file: ./TalentHunters/TalentHunters/TalentHunters-BackEnd/Dockerfile
+              file: TalentHunters/TalentHunters-BackEnd/Dockerfile
               push: true
               tags: devoncarswell/talenthunters:latest
 
