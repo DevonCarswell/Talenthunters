@@ -73,7 +73,7 @@ jobs:
      name: Deploy to Heroku
      runs-on: ubuntu-latest
      # only run this after deploying to docker
-     needs: [push_to_DockerHub]
+     needs: [Th_to_DockerHub]
      steps:
        - name: checkout repo
          uses: actions/checkout@v2
