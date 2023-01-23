@@ -1,0 +1,75 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+body {
+    margin-bottom: 60px;
+}
+
+.bg-talenthunters {
+    background-color: aqua;
+}
+
+li {
+    margin: 0px 10px;
+}
+
+i:hover {
+    color: blue
+}
+
+.queries {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    
+}
+
+.button {
+    background-color: white;
+    padding: 1px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+
+.button:hover {
+        background-color: #07e3be;
+        color: black;
+    }
+
+.blabla {
+    padding: 10px;
+    margin: 50px;
+
+}
+
+h1 {
+    text-align: center;
+}
+
+div {
+    justify-content: center;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+.column-left,
+.column-right {
+
+    width: 50%;
+}
