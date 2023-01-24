@@ -96,10 +96,13 @@ const EmployeeManagement = () => {
         newemailRef.current.value = '';
     }
 
-
-
+    const headers = Object.keys(data[0])
+    console.log(data)
+    console.log(data[0]);
+    console.log(headers);
     useEffect(() => {
         getusers();
+        
     }, [])
 
 

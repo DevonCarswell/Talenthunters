@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using TalentHunters_BackEnd.DAL.Interfaces;
 using TalentHunters_BackEnd.Models.Entities;
 using TalentHunters_BackEnd.Models.Enums;
+using TalentHunters_BackEnd.Models.HelperEntities;
 using TalentHunters_BackEnd.Utilities;
 
 namespace TalentHunters_BackEnd.DAL.Services
@@ -108,6 +109,12 @@ namespace TalentHunters_BackEnd.DAL.Services
 
             return false;
         }
+
+        private List<EmployeeData> EmployeeListCaster(List<Employee> employees)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
 

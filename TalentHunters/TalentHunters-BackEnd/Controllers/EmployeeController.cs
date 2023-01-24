@@ -33,6 +33,7 @@ namespace TalentHunters_BackEnd.Controllers
 
             if (employees.Count > 0)
             {
+                
                 return Ok(employees);
             }
 
@@ -119,14 +120,14 @@ namespace TalentHunters_BackEnd.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<LoggedUser>> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
+        public async Task<ActionResult<EmployeeData>> AuthenticateAsync([FromBody] AuthenticationData authenticationData)
         {
 
             var employee = await _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
 
             if (employee != null)
             {
-                var dataToSend = new LoggedUser()
+                var dataToSend = new EmployeeData()
                 {
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,

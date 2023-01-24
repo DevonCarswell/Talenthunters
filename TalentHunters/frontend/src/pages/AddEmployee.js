@@ -67,9 +67,9 @@ const AddEmployee = () => {
 
     return (
         <>
-            <div class="container">
-                <div class="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
-                <div class="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
+            <div className="container">
+                <div className="column-left">  < Link to='/employee-management' className="nav-link" > <Button text="Employee Management" /></Link ></div>
+                <div className="column-right"><Link to='/division-management' className="nav-link">  <Button text="Division Management" /></Link></div>
             </div>
 
             <div>
