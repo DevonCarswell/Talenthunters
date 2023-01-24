@@ -1,4 +1,3 @@
-import React from 'react'
 
 const AuthHeader = () =>  {
     // return authorization header with basic auth credentials
