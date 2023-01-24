@@ -9,7 +9,7 @@ import userService from '../pages/Home';
 
 
 
-function CollapsibleExample() {
+const  CollapsibleExample = () => {
 
     let authUser = JSON.parse(localStorage.getItem('authUser'));
     let navigate = useNavigate();

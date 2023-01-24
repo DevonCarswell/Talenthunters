@@ -5,7 +5,7 @@ import AuthHeader from '../helper/AuthHeader';
 
 
 
-function ReactComponent() {
+const AddEmployee = () => {
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -105,4 +105,4 @@ function ReactComponent() {
     );
 }
 
-export default ReactComponent;
+export default AddEmployee;

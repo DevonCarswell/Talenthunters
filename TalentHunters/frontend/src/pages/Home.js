@@ -38,45 +38,9 @@ const Home = () => {
                 window.location.reload();
                 return user;
             })
-        // .then((response) => {
-        //     if (response.status == 200) {
-        //         // store user details and basic auth credentials in local storage 
-        //         // to keep user logged in between page refreshes
+        };
 
-        //         user.authdata = window.btoa(user.email + ':' + user.password);
-        //         localStorage.setItem('authUser', JSON.stringify(user));
-        //     }
-
-        //     return user;
-
-
-
-        // })
-    }
-
-        ;
-
-
-    const handleChange = (e) => {
-        let value = e.target.value
-        let name = e.target.name
-
-        setUser((user) => {
-            return {
-                ...user,
-                [name]: value
-            }
-        })
-    }
-    console.log(localStorage.getItem('authUser'));
-    console.log(user.password);
-
-    function logout() {
-        // remove user from local storage to log user out
-        localStorage.clear();
-    }
-
-    function handleResponse(response) {
+        function handleResponse(response) {
         return response.text().then(text => {
             const data = text && JSON.parse(text);
             if (!response.ok) {
@@ -94,6 +58,26 @@ const Home = () => {
         });
     }
 
+
+    const handleChange = (e) => {
+        let value = e.target.value
+        let name = e.target.name
+
+        setUser((user) => {
+            return {
+                ...user,
+                [name]: value
+            }
+        })
+    }
+    
+
+    function logout() {
+        // remove user from local storage to log user out
+        localStorage.clear();
+    }
+
+  
 
 
     return (

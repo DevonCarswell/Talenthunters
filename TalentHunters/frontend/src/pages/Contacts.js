@@ -3,7 +3,7 @@ import Dalma from '../images/dalmacsernok.jpg';
 import Zsolt from '../images/zsoltkasza.jpg';
 
 
-const contacts = () => {
+const Contacts = () => {
     return (
         <>
             <div className="text-center">
@@ -26,4 +26,4 @@ const contacts = () => {
     )
 }
 
-export default contacts;
+export default Contacts;

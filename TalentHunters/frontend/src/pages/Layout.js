@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import React from 'react';
 
 
-const layout = () => {
+const Layout = () => {
     return (
         <div>
             <Nav />
@@ -16,4 +16,4 @@ const layout = () => {
     )
 }
 
-export default layout;
+export default Layout;

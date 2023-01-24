@@ -5,7 +5,7 @@ import AuthHeader from '../helper/AuthHeader';
 
 
 
-function AddDivision() {
+const AddDivision = () => {
     const [division, setDivision] = useState({
         name: "",
         manager: {

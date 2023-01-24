@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import authHeader from '../helper/AuthHeader';
 
-const about = () => {
+const About = () => {
     const header = authHeader();
-    console.log(header);
-    console.log(`'Authorization': 'Basic ' + ${window.btoa('dalma.csernok@talenthunters.com:7KHnP4yZ')}`);
+
     return (
         <>
-    <div className="blabla">
+    <div className="about">
         <h1>About</h1>
      
         <div>
@@ -24,4 +23,4 @@ const about = () => {
         )
 }
 
-export default about;
+export default About;

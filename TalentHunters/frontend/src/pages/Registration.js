@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 
-function ReactComponent() {
+const Registration = () =>  {
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -100,4 +100,4 @@ function ReactComponent() {
     );
 }
 
-export default ReactComponent;
+export default Registration;

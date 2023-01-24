@@ -1,6 +1,6 @@
 import React from 'react'
 
-function authHeader() {
+const AuthHeader = () =>  {
     // return authorization header with basic auth credentials
     let authUser = JSON.parse(localStorage.getItem('authUser'));
 
@@ -11,4 +11,4 @@ function authHeader() {
     }
 }
 
-export default authHeader;
+export default AuthHeader;
