@@ -1,23 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {  } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button'
-
+import useHandleChange from '../helper/Hooks';
 
 
 const Home = () => {
-
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
-        authdata: "",
-        role: ""
-    })
-
-
-
+   const {formValues, handleChange} = useHandleChange();
+    
+    
     const login = async () => {
         const employee = {
-            'Email': user.email, 'Password': user.password
+            'Email': formValues.email, 'Password': formValues.password
         };
 
         const requestOptions = {
@@ -32,14 +25,15 @@ const Home = () => {
                 if (authUser) {
                     // store user details and basic auth credentials in local storage 
                     // to keep user logged in between page refreshes
-                    authUser.authdata = window.btoa(user.email + ':' + user.password);
+                    authUser.authdata = window.btoa(formValues.email + ':' + formValues.password);
                     localStorage.setItem('authUser', JSON.stringify(authUser));
                 }
                 window.location.reload();
-                return user;
+                return JSON.parse(localStorage.getItem('authUser'));
             })
         };
 
+        
         function handleResponse(response) {
         return response.text().then(text => {
             const data = text && JSON.parse(text);
@@ -59,17 +53,7 @@ const Home = () => {
     }
 
 
-    const handleChange = (e) => {
-        let value = e.target.value
-        let name = e.target.name
-
-        setUser((user) => {
-            return {
-                ...user,
-                [name]: value
-            }
-        })
-    }
+    
     
 
     function logout() {
@@ -86,10 +70,10 @@ const Home = () => {
         <div className="text-center">
             <h1>Login</h1>
             <label>Email</label><br />
-            <input type="email" id="email" name="email" placeholder="example@gmail.com" value={user.email} onChange={handleChange}
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" value={formValues.email ||''} onChange={handleChange}
                 required /><br /><br />
             <label>Password</label><br />
-            <input type="password" id="password" name="password" placeholder="password" value={user.password} onChange={handleChange}
+            <input type="password" id="password" name="password" placeholder="password" value={formValues.password || ''} onChange={handleChange}
                 required /><br /><br />
             <Button text="login" onClick={() => login()} />
 
