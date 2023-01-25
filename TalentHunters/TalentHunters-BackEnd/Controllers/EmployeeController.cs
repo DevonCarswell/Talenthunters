@@ -42,9 +42,9 @@ namespace TalentHunters_BackEnd.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet("get-employee/{id}")]
-        public async Task<ActionResult<Employee>> GetEmployeeById(long id)
+        public async Task<ActionResult<List<EmployeeData>>> GetEmployeeById(long id)
         {
-            var employee = await _employeeService.GetEmployeeById(id);
+            var employee = await _employeeService.GetEmployeeDataById(id);
             if (employee is not null)
             {
                 return Ok(employee);

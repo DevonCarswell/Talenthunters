@@ -1,36 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Table = ({ data }) => {
-  const [header, setHeader] = useState([]);
+  const [headers, setHeaders] = useState([]);
+  const [tableData, setTableData] = useState([{}]);
+
+  useEffect(() => {
+    setHeaders(Object.keys(data[0]));
+    setTableData(data);
+  }, [data]);
+
+  //console.log(headers);
   return (
     <>
-      <table className="table" style={{ textAlign: "center" }}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Registration Date</th>
-          </tr>
-        </thead>
+      {data.length > 0 ? (
+        <table className="table" style={{ textAlign: "center" }}>
+          <thead>
+            <tr>
+              {headers.map((header, index) => (
+                <th key={index}>{header}</th>
+              ))}
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr key={index}>
-            <td value={user.id}> {user.id} </td>
-
-            <td> {user.firstName} </td>
-            <td> {user.lastName} </td>
-            <td> {user.email} </td>
-            {/* TODO employeeRole separation*/}
-            <td> {user.employeeRole} </td>
-            <td>
-              {new Date(user.registrationDate).toLocaleDateString("en-gb")}{" "}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            {tableData.map((tdata, index) => (
+              <tr key={index}>
+                {Object.values(tdata).map((val) => (
+                  <td>{val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </>
   );
 };

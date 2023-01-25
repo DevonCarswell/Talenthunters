@@ -30,6 +30,22 @@ namespace TalentHunters_BackEnd.DAL.Services
             return null;
         }
 
+        public async Task<List<EmployeeData>> GetEmployeeDataById(long id)
+        {
+            var employee = await GetEmployeeById(id);
+            if (employee is not null)
+            {
+                List<EmployeeData> list = new();
+                var employeeData = EmployeeCaster(employee);
+                list.Add(employeeData);
+
+                return list;
+            }
+
+            return null;
+        }
+
+
         public async Task<List<EmployeeData>> GetAllEmployees()
         {
             var employees = await _context.Employees.ToListAsync();
@@ -40,6 +56,7 @@ namespace TalentHunters_BackEnd.DAL.Services
         public async Task AddEmployee(Employee employee)
         {
             employee.HashedPassword = SecurePasswordHasher.Hash(employee.HashedPassword);
+            
             _context.Employees.Add(employee);
 
             await _context.SaveChangesAsync();

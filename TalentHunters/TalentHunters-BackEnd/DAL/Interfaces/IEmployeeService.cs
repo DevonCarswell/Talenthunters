@@ -7,6 +7,7 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
     public interface IEmployeeService
     {
         Task<Employee> GetEmployeeById(long id);
+        Task<List<EmployeeData>> GetEmployeeDataById(long id);
         Task<List<EmployeeData>> GetAllEmployees();
         Task AddEmployee(Employee employee);
         Task UpdateEmployeeEmail(long id, string email);

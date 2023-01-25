@@ -11,9 +11,8 @@ const Home = () => {
     const login = async () =>{
         const email = userData.email;
         const password = userData.password;
-        userService.login(email, password);
+        await userService.login(email, password);
     }
-
 
     return (
         <>
