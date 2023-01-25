@@ -9,6 +9,12 @@ const Table = ({ data }) => {
     setTableData(data);
   }, [data]);
 
+  const handleClick = (header) => {
+    const newdata = [...tableData].sort((a, b) =>
+      a[header] > b[header] ? 1 : -1
+    );
+    setTableData(newdata);
+  };
   //console.log(headers);
   return (
     <>
@@ -17,7 +23,9 @@ const Table = ({ data }) => {
           <thead>
             <tr>
               {headers.map((header, index) => (
-                <th key={index}>{header}</th>
+                <th key={index} onClick={() => handleClick(header)}>
+                  {header}
+                </th>
               ))}
             </tr>
           </thead>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Table from '../components/Table';
 import {userService} from '../helper/Fetch';
-import useHandleChange from '../helper/Hooks';
+import {Hooks} from '../helper/Hooks';
 import '../App.css';
 
 //response.text() if we will use Actionresult
@@ -11,7 +11,7 @@ import '../App.css';
 // TODO implement fetch js file 
 const EmployeeManagement = () => {
     const [data, setData] = useState([{}]);
-    const {formValues: inputData, handleChange} = useHandleChange();
+    const {formValues: inputData, handleChange} = Hooks.useHandleChange();
     const table = useMemo( () => <Table data={data}/>, [data])
    
     console.log(inputData)

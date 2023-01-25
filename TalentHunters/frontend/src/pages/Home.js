@@ -1,11 +1,11 @@
 import React, {  } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button'
-import useHandleChange from '../helper/Hooks';
+import {Hooks} from '../helper/Hooks';
 import {userService} from '../helper/Fetch'
 
 const Home = () => {
-   const {formValues: userData, handleChange} = useHandleChange();
+   const {formValues: userData, handleChange} = Hooks.useHandleChange();
     
     
     const login = async () =>{
