@@ -12,12 +12,10 @@ const EmployeeManagement = () => {
     const [data, setData] = useState([{}]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState("");
-    const inputRef = useRef(null);
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
+    
     const newemailRef = useRef(null);
     const header = AuthHeader();
-    const [auth, setAuth] = useState("");
+   
 
 
     const getusers = async () => {
@@ -96,10 +94,7 @@ const EmployeeManagement = () => {
         newemailRef.current.value = '';
     }
 
-    const headers = Object.keys(data[0])
-    console.log(data)
-    console.log(data[0]);
-    console.log(headers);
+  
     useEffect(() => {
         getusers();
         

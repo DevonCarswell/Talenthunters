@@ -125,12 +125,12 @@ namespace TalentHunters_BackEnd.Controllers
 
             var employee = await _employeeService.AuthenticateAsync(authenticationData.Email, authenticationData.Password);
 
-            if (employee != null)
+            if (employee is not null)
             {
                 var dataToSend = new EmployeeData()
                 {
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
+                    First_Name = employee.FirstName,
+                    Last_Name = employee.LastName,
                     Email = employee.Email,
                     Role = employee.Role
                 };

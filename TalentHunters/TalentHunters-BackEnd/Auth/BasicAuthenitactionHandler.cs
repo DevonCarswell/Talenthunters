@@ -49,7 +49,7 @@ namespace TalentHunters_BackEnd.Auth
 
             string email = userInfoDecoded.Split(":")[0];
             string password = userInfoDecoded.Split(":")[1];
-            var employee = _employeeService.GetAllEmployees().Result.FirstOrDefault(employee => employee.Email == email);
+            var employee = _employeeService.AuthenticateAsync(email,password).Result;
             if (employee is not null)
             {
                 if (!Utilities.SecurePasswordHasher.Verify(password, employee.HashedPassword))

@@ -21,8 +21,7 @@ namespace TalentHunters_BackEnd.DAL.Services
 
         public async Task<Employee?> GetEmployeeById(long id)
         {
-            var employees = await GetAllEmployees();
-            var employee = employees.FirstOrDefault(u => u.Id == id);
+            var employee = _context.Employees.FirstOrDefault(u => u.Id == id);
             if (employee is not null)
             {
                 return employee;
@@ -31,21 +30,16 @@ namespace TalentHunters_BackEnd.DAL.Services
             return null;
         }
 
-        public async Task<List<Employee>> GetAllEmployees()
+        public async Task<List<EmployeeData>> GetAllEmployees()
         {
-            var employees = _context.Employees.ToListAsync();
-            return await employees;
+            var employees = await _context.Employees.ToListAsync();
+            var convertedEmployees = EmployeesListCaster(employees);
+            return convertedEmployees;
         }
 
         public async Task AddEmployee(Employee employee)
         {
-            var employees = await GetAllEmployees();
-            
             employee.HashedPassword = SecurePasswordHasher.Hash(employee.HashedPassword);
-            // if (employee.EmployeeRole == null)
-            // {
-            //     employee.EmployeeRole = EmployeeRole.None;
-            // }
             _context.Employees.Add(employee);
 
             await _context.SaveChangesAsync();
@@ -110,11 +104,37 @@ namespace TalentHunters_BackEnd.DAL.Services
             return false;
         }
 
-        private List<EmployeeData> EmployeeListCaster(List<Employee> employees)
+        private List<EmployeeData> EmployeesListCaster(List<Employee> employees)
         {
-            throw new NotImplementedException();
+            var convertedEmployees = employees.Select(x => new EmployeeData()
+            {
+                Id = x.Id,
+                Email = x.Email,
+                First_Name = x.FirstName,
+                Last_Name = x.LastName,
+                Registration_Date = x.RegistrationDate,
+                Employee_Role = x.EmployeeRole,
+                Role = x.Role
+
+            }).ToList();
+            return convertedEmployees;
         }
 
+        private EmployeeData EmployeeCaster(Employee employee)
+        {
+            var convertedEmployee = new EmployeeData()
+            {
+                Id = employee.Id,
+                Email = employee.Email,
+                First_Name = employee.FirstName,
+                Last_Name = employee.LastName,
+                Registration_Date = employee.RegistrationDate,
+                Employee_Role = employee.EmployeeRole,
+                Role = employee.Role
+            };
+            return convertedEmployee;
+            
+        }
     }
 }
 
