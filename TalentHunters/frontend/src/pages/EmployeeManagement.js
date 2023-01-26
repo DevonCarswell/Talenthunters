@@ -14,7 +14,6 @@ const EmployeeManagement = () => {
     const {formValues: inputData, handleChange} = Hooks.useHandleChange();
     const table = useMemo( () => <Table data={data}/>, [data])
    
-    console.log(inputData)
 
     const getUsers = async () =>{
        await userService.getusers(setData);
