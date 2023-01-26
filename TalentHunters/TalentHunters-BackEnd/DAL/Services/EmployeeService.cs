@@ -85,6 +85,19 @@ namespace TalentHunters_BackEnd.DAL.Services
             
         }
 
+        public async Task<List<EmployeeRole>> GetAllRoles()
+        {
+            var roles =  Enum.GetValues(typeof(EmployeeRole)).Cast<EmployeeRole>().ToList();
+            return roles;
+        }
+
+        public async Task<List<EmployeeRole>> GetAllActiveRoles()
+        {
+            //List<EmployeeRole>
+            var activeRoles = await _context.Employees.Select(x => x.EmployeeRole).Distinct().ToListAsync();
+            return activeRoles;
+        }
+
         public async Task<List<Employee>> GetEmployeesWithoutDivision()
         {
             throw new NotImplementedException();

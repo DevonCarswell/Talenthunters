@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TalentHunters-FrontEnd", "TalentHunters-FrontEnd\TalentHunters-FrontEnd.esproj", "{CF61B38B-F46E-4261-8FD4-91EB53482A38}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TalentHunters-BackEnd", "TalentHunters-BackEnd\TalentHunters-BackEnd.csproj", "{05A06CD8-45D5-4A42-AA20-D32BA0446978}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "talenthunterstests", "talenthunterstests\talenthunterstests.csproj", "{F3A51EA4-F76E-4A74-85C6-E466006DA181}"
@@ -17,12 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF61B38B-F46E-4261-8FD4-91EB53482A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF61B38B-F46E-4261-8FD4-91EB53482A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF61B38B-F46E-4261-8FD4-91EB53482A38}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{CF61B38B-F46E-4261-8FD4-91EB53482A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF61B38B-F46E-4261-8FD4-91EB53482A38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF61B38B-F46E-4261-8FD4-91EB53482A38}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{05A06CD8-45D5-4A42-AA20-D32BA0446978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05A06CD8-45D5-4A42-AA20-D32BA0446978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05A06CD8-45D5-4A42-AA20-D32BA0446978}.Release|Any CPU.ActiveCfg = Release|Any CPU

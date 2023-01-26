@@ -1,5 +1,7 @@
 import AuthHeader from "./AuthHeader";
 
+// const header = AuthHeader();
+
 const login = async (email, password) => {
   const employee = {
     Email: email,
@@ -51,7 +53,7 @@ const logout = () => {
   localStorage.clear();
 };
 
-const getusers = async (setData) => {
+const getUsers = async (setData) => {
   fetch(`/employee/get-employees`, {
     method: "GET",
     headers: {
@@ -63,7 +65,7 @@ const getusers = async (setData) => {
     .then((json) => setData(json));
 };
 
-const getuser = async (setData, userId) => {
+const getUser = async (userId, setData) => {
   fetch(`/employee/get-employee/${userId}`, {
     method: "GET",
     headers: {
@@ -75,7 +77,7 @@ const getuser = async (setData, userId) => {
     .then((json) => setData(json));
 };
 
-async function deleteuser(id) {
+async function deleteUser(id) {
   await fetch(`/employee/delete-employee/${id}`, {
     method: "DELETE",
     headers: {
@@ -85,7 +87,7 @@ async function deleteuser(id) {
   });
 }
 
-async function updateemail(id, email) {
+async function updateEmail(id, email) {
   const requestOptions = {
     method: "PUT",
     headers: {
@@ -97,9 +99,36 @@ async function updateemail(id, email) {
   await fetch(`/employee/update-employee-email/${id}`, requestOptions);
 }
 
+async function getEmployeeRoles(setData) {
+  fetch(`/employee/get-roles`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json;charset=UTF-8",
+      Authorization: AuthHeader(),
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => setData(json));
+}
+
+async function addUser(newUser) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: AuthHeader(),
+    },
+    body: JSON.stringify(newUser),
+  };
+  await fetch("/employee/add-employee", requestOptions);
+}
 export const userService = {
   login,
   logout,
-  getusers,
-  getuser,
+  getUsers,
+  getUser,
+  deleteUser,
+  updateEmail,
+  getEmployeeRoles,
+  addUser,
 };

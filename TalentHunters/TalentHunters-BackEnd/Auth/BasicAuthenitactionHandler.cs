@@ -49,7 +49,7 @@ namespace TalentHunters_BackEnd.Auth
 
             string email = userInfoDecoded.Split(":")[0];
             string password = userInfoDecoded.Split(":")[1];
-            var employee = _employeeService.AuthenticateAsync(email,password).Result;
+            Employee employee = _employeeService.AuthenticateAsync(email, password).Result;
             if (employee is not null)
             {
                 if (!Utilities.SecurePasswordHasher.Verify(password, employee.HashedPassword))
@@ -60,17 +60,16 @@ namespace TalentHunters_BackEnd.Auth
             
            
 
-            var claims = new List<Claim>();
+            List<Claim> claims;
 
 
             if (employee is not null)
             {
-                claims = new List<Claim>()
+                claims = new()
                 {
-                    new Claim(ClaimTypes.Name, employee.Email)
+                    new Claim(ClaimTypes.Name, employee.Email),
+                    new Claim(ClaimTypes.Role, employee.Role)
                 };
-
-                claims.Add(new Claim(ClaimTypes.Role, employee.Role));
 
             }
             else

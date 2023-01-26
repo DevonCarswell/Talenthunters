@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TalentHunters_BackEnd.Models.Entities;
+using TalentHunters_BackEnd.Models.Enums;
 using TalentHunters_BackEnd.Models.HelperEntities;
 
 namespace TalentHunters_BackEnd.DAL.Interfaces
@@ -13,7 +14,8 @@ namespace TalentHunters_BackEnd.DAL.Interfaces
         Task UpdateEmployeeEmail(long id, string email);
         Task DeleteEmployee(long id);
 
-        Task<List<Employee>> GetEmployeesWithoutDivision();
+        Task<List<EmployeeRole>> GetAllRoles();
+        Task<List<EmployeeRole>> GetAllActiveRoles();
 
         Task<List<string>> GetAllEmails();
 

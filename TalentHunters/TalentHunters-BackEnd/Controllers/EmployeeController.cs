@@ -99,10 +99,15 @@ namespace TalentHunters_BackEnd.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet("get-roles")]
-        public List<EmployeeRole> GetRoles()
+        public async Task<ActionResult<List<EmployeeRole>>> GetActiveRoles()
         {
-            var roles = Enum.GetValues(typeof(EmployeeRole)).Cast<EmployeeRole>().ToList();
-            return roles;
+            var roles = await _employeeService.GetAllActiveRoles();
+            if (roles is not null)
+            {
+                return Ok(roles);
+            }
+            return NoContent();
+
         }
 
         [AllowAnonymous]
