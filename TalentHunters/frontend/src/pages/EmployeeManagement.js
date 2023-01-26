@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Table from "../components/Table";
@@ -13,18 +13,19 @@ const EmployeeManagement = () => {
   const { formValues: inputData, handleChange } = Hooks.useHandleChange();
   const table = useMemo(() => <Table data={data} />, [data]);
 
-  const getUsers = async () => {
+  const getUsers = useCallback(async () => {
     await userService.getUsers(setData);
-  };
+  }, []);
 
   const getUserById = async () => {
     const userId = inputData.userid;
     await userService.getUser(userId, setData);
   };
 
+  console.log(data);
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   return (
     <>

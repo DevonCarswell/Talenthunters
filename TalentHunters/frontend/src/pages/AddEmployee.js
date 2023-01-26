@@ -13,7 +13,6 @@ const AddEmployee = () => {
     };
     getRoles();
   }, []);
-  console.log(employeeData);
 
   const adduser = () => {
     const newUser = {
