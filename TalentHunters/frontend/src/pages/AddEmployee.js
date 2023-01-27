@@ -14,7 +14,7 @@ const AddEmployee = () => {
     getRoles();
   }, []);
 
-  const adduser = () => {
+  const addUser = () => {
     const newUser = {
       Email: employeeData.email,
       HashedPassword: employeeData.password,
@@ -107,7 +107,7 @@ const AddEmployee = () => {
               ))}
             </select>
           </div>
-          <Button onClick={() => adduser()} text="Add User" /> <br />
+          <Button onClick={() => addUser()} text="Add User" /> <br />
           <br />
         </form>
       </div>

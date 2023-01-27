@@ -26,6 +26,8 @@ const Table = ({ data }) => {
     setOrderBy(header);
   };
 
+  console.log(data);
+
   return (
     <>
       {data.length ? (
@@ -43,9 +45,16 @@ const Table = ({ data }) => {
           <tbody>
             {tableData.map((tdata, index) => (
               <tr key={index}>
-                {Object.values(tdata).map((val, i) => (
-                  <td key={i}>{val}</td>
-                ))}
+                {Object.values(tdata).map((val, i) => {
+                  if (Object.prototype.toString.call(val) === "[object Date]") {
+                    return (
+                      <td key={i}>
+                        {new Date(val).toLocaleDateString("en-gb")}
+                      </td>
+                    );
+                  }
+                  return <td key={i}>{val}</td>;
+                })}
               </tr>
             ))}
           </tbody>

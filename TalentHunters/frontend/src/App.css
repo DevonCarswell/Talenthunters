@@ -75,6 +75,7 @@ div {
 }
 
 .footer{
+    display: flex;
     margin-top: 1rem;
     padding: 1rem;
     background-color:rgb(7, 227, 190);

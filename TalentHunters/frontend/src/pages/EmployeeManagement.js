@@ -22,7 +22,6 @@ const EmployeeManagement = () => {
     await userService.getUser(userId, setData);
   };
 
-  console.log(data);
   useEffect(() => {
     getUsers();
   }, [getUsers]);
