@@ -371,3 +371,4 @@ MigrationBackup/
 *vs/
 *vscode/
 *TalentHunters-Frontend.esproj.user
+.env

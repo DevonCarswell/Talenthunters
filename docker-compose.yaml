@@ -1,0 +1,77 @@
+services:
+  backend:
+    image: backend
+    restart: always
+    #secrets:
+    #  - db-password
+    #environment:
+    #  MYSQL_RANDOM_ROOT_PASSWORD: 1
+    #  MYSQL_DATABASE: accountowner
+    #  MYSQL_USER: dbuser
+    #  MYSQL_PASSWORD: dbuserpassword
+    #networks:
+    #  - react-spring
+    #  - spring-mysql
+    depends_on:
+      db:
+        condition: service_healthy
+  #db:
+  #  # We use a mariadb image which supports both amd64 & arm64 architecture
+  #  image: mariadb:10.6.4-focal
+  #  # If you really want to use MySQL, uncomment the following line
+  #  #image: mysql:8.0.19
+  #  environment:
+  #    MYSQL_RANDOM_ROOT_PASSWORD: 1
+  #    MYSQL_DATABASE: accountowner
+  #    MYSQL_USER: dbuser
+  #    MYSQL_PASSWORD: dbuserpassword
+  #  restart: always
+  #  healthcheck:
+  #    test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+  #    interval: 3s
+  #    retries: 5
+  #    start_period: 30s
+  #  #secrets:
+  #  #  - db-password
+  #  volumes:
+  #    - db-data:/var/lib/mysql
+  #  #networks:
+  #  #  - spring-mysql
+  db:
+     image: mariadb:10.6.4-focal
+     environment:
+       MYSQL_DATABASE: TalentHunters
+       MYSQL_USER: dbuser
+       MYSQL_PASSWORD: dbuserpassword
+     volumes:
+       #- dbdata:/var/lib/mysql
+       - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+     restart: always
+     healthcheck:
+      test: ["CMD", "mysqladmin", "-u$MYSQL_USER", "-p$MYSQL_PASSWORD",  "ping", "-h", "localhost"]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+
+  frontend:
+    image: frontend
+    ports:
+      - 3000:3000
+    #volumes:
+    #  - ./frontend/src:/code/src
+    #  - /project/node_modules
+    #networks:
+    #  - react-spring
+    depends_on:
+      - backend
+    expose:
+      - 3000
+      
+#volumes:
+#  db-data:
+#secrets:
+#  db-password:
+#    file: db/password.txt
+#networks:
+#  react-spring: {}
+#  spring-mysql: {}
